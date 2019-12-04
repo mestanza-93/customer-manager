@@ -1,39 +1,23 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const ObjectID = Schema.ObjectId;
+var Datastore = require('nedb');
 
-const configDB = {
-    name: 'customermanager',
-    url: 'mongodb://localhost',
-    options: {useMongoClient: true, useNewUrlParser: true}
+var config = {
+    pathCustomer: '../database/customer.db',
+    pathHistory: '../database/history.db'
 }
 
-const state = {
-    db : null
-};
+var customer = new Datastore({ filename: config.pathCustomer, timestampData: true, autoload: true});
+var history = new Datastore({ filename: config.pathHistory, timestampData: true, autoload: true});
 
-const connect = (cb) => {
-    if(state.db)
-        cb();
+var connect = () => {
+    if(customer && history){
+        console.log('Conectado a la Base de Datos correctamente.');
+        return {customer, history};
+    }
     else{
-        mongoose.connect(configDB.url, configDB.options, (err, client) => {
-            if(err)
-                cb(err);
-            else{
-                state.db = client.db(configDB.name);
-                cb();
-            }
-        });
+        console.log('No es posible conectar a la Base de Datos.');
     }
 }
 
-const getPrimaryKey = (_id) => {
-    return ObjectID(_id);
-}
+console.log(connect());
 
-const getDB = () => {
-    return state.db;
-}
-
-module.exports = {getDB, connect, getPrimaryKey};
-
+module.exports = {connect};

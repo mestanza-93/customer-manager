@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const autoIncrementModelID = require('./counter');
+const historySchema = require('./history');
 
 const customerSchema = new Schema({
     id: {type: Number, unique: true, min: 1},
@@ -16,15 +16,7 @@ const customerSchema = new Schema({
     installationDate: {type: Date, default: Date.now},
     modificationDate: {type: Date, default: Date.now},
     lastJobDate: {type: Date, default: Date.now},
-    history: []
-});
-
-customerSchema.pre('save', function(next){
-    if(!this.isNew){
-        next();
-        return;
-    }
-    autoIncrementModelID('customer', this, next);
+    history: [historySchema]
 });
 
 module.exports = mongoose.model('customer', customerSchema);
