@@ -2,21 +2,66 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
-        <script>let $ = require('jquery');</script>
+        <script>
+          var $ = require('jquery');
+          var dt = require('datatables.net')();
+          var dtbs = require('datatables.net-bs4')(); 
+        </script>
         <script> 
           $(function(){
             $("#includedContent").load("base.html"); 
           });
-        </script> 
+        </script>
     </head>
 
     <body>
-
         <div id="includedContent"></div>
-              
-        <h1>Hello World!</h1>
-        We are using node <script>document.write(process.versions.node)</script>,
-        Chrome <script>document.write(process.versions.chrome)</script>,
-        and Electron <script>document.write(process.versions.electron)</script>.
+        <script>
+            $(document).ready(function(){
+                $('#customers').DataTable();
+            });
+        </script>
+        <div class="table-responsive">
+            <table id="customers" class="table table-striped table-bordered">
+                <caption>Listado de últimos trabajos realizados</caption>
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Población</th>
+                    <th scope="col">Último trabajo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>@fat</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>@twitter</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>      
+        
     </body>
 </html>

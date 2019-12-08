@@ -4,7 +4,7 @@
   "description": "Customer Management Desktop App with Electron",
   "main": "config/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-dev": "nodemon --watch * --exec \"electron .\"",
     "start": "electron ."
   },
   "repository": {
@@ -25,8 +25,12 @@
   },
   "dependencies": {
     "bootstrap": "^4.4.1",
+    "datatables.net": "^1.10.20",
+    "datatables.net-bs4": "^1.10.20",
     "jquery": "^3.4.1",
+    "morgan": "^1.9.1",
     "nedb": "^1.8.0",
+    "nodemon": "^2.0.1",
     "popper.js": "^1.16.0"
   }
 }

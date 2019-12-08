@@ -10,14 +10,14 @@ var history = new Datastore({ filename: config.pathHistory, timestampData: true,
 
 var connect = () => {
     if(customer && history){
-        console.log('Conectado a la Base de Datos correctamente.');
+        //console.log('Conectado a la Base de Datos correctamente.');
         return {customer, history};
     }
     else{
-        console.log('No es posible conectar a la Base de Datos.');
+        //console.log('No es posible conectar a la Base de Datos.');
     }
 }
 
-console.log(connect());
+//console.log(connect());
 
 module.exports = {connect};
