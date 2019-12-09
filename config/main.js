@@ -28,7 +28,7 @@ function createWindow () {
   }))
 
   // Abre las herramientas de desarrollo (DevTools).
-  mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
 
   // Emitido cuando la ventana es cerrada.
   mainWindow.on('closed', () => {

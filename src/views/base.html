@@ -9,13 +9,16 @@
 
     <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" type="text/css" href="../css/datatable.css"></link>
+
     <script>require('popper.js');</script>
     <script>require('bootstrap');</script>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Gestor Clientes</a>
+        <a class="navbar-brand" href="index.html">Gestor Clientes</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,11 +38,10 @@
                 </li>
             </ul>
         </div>
-
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Buscar">
-            <button class="btn btn-primary my-2 my-sm-0" type="submit">Buscar</button>
+        <form action="new_customer.html">
+            <button class="btn btn-primary my-2 my-sm-0 text-center" type="submit">Nuevo cliente</button>
         </form>
+        
     </nav>
 </body>
 </html>
