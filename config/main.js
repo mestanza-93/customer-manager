@@ -3,8 +3,10 @@ const url = require('url')
 const path = require('path')
 
 const db = require('./db')
+global.database = db
+console.log(db.connect().customer);
 
-const { app, BrowserWindow } = electron
+const { app, BrowserWindow, ipcMain } = electron
 
 // Mantén una referencia global del objeto window, si no lo haces, la ventana 
 // se cerrará automáticamente cuando el objeto JavaScript sea eliminado por el recolector de basura.
@@ -13,8 +15,8 @@ let mainWindow
 function createWindow () {
   // Crea la ventana del navegador.
   mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    width: 1800,
+    height: 1000,
     webPreferences: {
       nodeIntegration: true
     }
@@ -22,13 +24,13 @@ function createWindow () {
 
   // y carga el index.html de la aplicación.
   mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, '..', 'src', 'views', 'index.html'),
+    pathname: path.join( __dirname, '..', 'src', 'views', 'index.html' ),
     protocol: 'file:',
     slashes: true
   }))
 
   // Abre las herramientas de desarrollo (DevTools).
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   // Emitido cuando la ventana es cerrada.
   mainWindow.on('closed', () => {

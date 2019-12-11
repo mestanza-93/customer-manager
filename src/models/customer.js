@@ -1,23 +1,43 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+//const db = require('../../config/db');
+const remote = require('electron').remote;
+db = remote.getGlobal('database');
+var customer = db.connect().customer;
 
-const historySchema = require('./history');
 
-const customerSchema = new Schema({
-    id: {type: Number, unique: true, min: 1},
-    name: {type: String, required: true},
-    lastname: String,
-    phone: Number,
-    phone2: Number,
-    email: String,
-    address: String,
-    town: String,
-    postalCode: Number,
-    work: String,
-    installationDate: {type: Date, default: Date.now},
-    modificationDate: {type: Date, default: Date.now},
-    lastJobDate: {type: Date, default: Date.now},
-    history: [historySchema]
-});
+// ID Autoincremental
+customer.getCustomerAutoId = function (onFind) {
+    customer.findOne({ _id: '__autoid__' }, function(err, doc){
+        if (err){
+            onFind && onFind(err)
+        } else {
+            customer.update({ _id: '__autoid__' }, { $set: { value: ++doc.value } }, {}, 
+            function (err, count) {
+                onFind && onFind(err, doc.value);
+            });
+        }
+        return doc.value;
+    });  
+}
 
-module.exports = mongoose.model('customer', customerSchema);
+function getFormData(){
+    var data = {};
+    var id = customer.getCustomerAutoId();
+    console.log(id);
+    data['_id'] = id;
+    document.querySelectorAll("input").forEach(ele => data[ele.name] = ele.value || "");
+    console.log(data);
+    return data;
+}
+
+function insertCustomer(){
+    data = getFormData();
+    customer.insert(data, function(err, insertedData){
+        if(!err){
+            console.log("Insert OK", insertedData.name);
+        } else {
+            console.log("ERROR: ", err);
+        }
+    });
+}
+
+
