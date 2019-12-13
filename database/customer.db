@@ -1,2 +1,2 @@
-{"_id":"__autoid__","value":1,"createdAt":{"$$date":1576077879013},"updatedAt":{"$$date":1576079260664}}
-{"_id":"__autoid__","value":2,"createdAt":{"$$date":1576077879013},"updatedAt":{"$$date":1576079469030}}
+{"name":"Antonio ","lastname":"Fernández Díaz","email":"antonio@gmail.com","phone":"623457896","phone2":"754897256","address":"Calle Martínez de la Rosa n14","town":"Nueva Málaga","postalcode":"29050","_id":"fZSOsGNG2RI7LuYs","createdAt":{"$$date":1576244642927},"updatedAt":{"$$date":1576244642927}}
+{"name":"Pablo","lastname":"Mestanza","email":"pablo93ml@gmail.com","phone":"662278632","phone2":"952413640","address":"Cortijo Mestanza n14","town":"Alhaurín de la Torre","postalcode":"29130","_id":"zl8u5kcoEvJrnsGX","createdAt":{"$$date":1576244165313},"updatedAt":{"$$date":1576244165313}}

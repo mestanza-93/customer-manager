@@ -20,7 +20,7 @@ var connect = () => {
 }
 
 // ID Autoincremental
-customer.insert({ _id: '__autoid__', value: -1 });
-work.insert({ _id: '__autoid__', value: -1 });
+//customer.insert({ _id: '__autoid__', value: -1 });
+//work.insert({ _id: '__autoid__', value: -1 });
 
 module.exports = { connect };

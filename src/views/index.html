@@ -12,55 +12,31 @@
             $("#includedContent").load("base.html"); 
           });
         </script>
+        <script type="text/javascript" src="../models/customer.js"></script>
     </head>
 
     <body>
         <div id="includedContent"></div>
         <script>
             $(document).ready(function(){
-                $('#customers').DataTable();
+                $('#customers').DataTable({
+                  data: getAllCustomers(),
+                  columns: [
+                    { data: 'name' },
+                    { data: 'lastname' },
+                    { data: 'phone' },
+                    { data: 'address' }
+                  ]
+                });
             });
         </script>
         <div class="table-responsive">
             <table id="customers" class="table table-striped table-bordered">
                 <caption>Listado de últimos trabajos realizados</caption>
                 <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellidos</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Dirección</th>
-                    <th scope="col">Población</th>
-                    <th scope="col">Último trabajo</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                </tbody>
-              </table>
+
+                </thead>        
+            </table>
         </div>      
         
     </body>
