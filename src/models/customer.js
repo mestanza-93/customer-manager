@@ -39,56 +39,26 @@ function insertCustomer () {
 Get all customers data then call processCustomersData()
 to format the data for Datatables.
 */ 
-function getAllCustomers () {
+function getAllCustomers (cb) {
     customerDB.find({}, function(err, data) {
         if (err) {
             console.log("ERROR: ", err);
-            return [];
-        } else {
-            var customers = processCustomersData(data);
-            console.log("Customers: ", customers);
-            return customers;
+            return cb(err);        
         }
-    });
-}
 
-
-/*
- Get columns to show in Datatables and format this data to 
- show correctly in Datatables.
- */
-function processCustomersData (customers) {
-    var data = [];
-
-    for (element of customers) {
-        var ele = {};
-        for (column of columnsDatatable){
-            ele[column] = element[column];
+        /*
+        Get columns to show in Datatables and format this data to 
+        show correctly in Datatables.
+        */
+        var customers = [];
+        for (element of data) {
+            var ele = {};
+            for (column of columnsDatatable) {
+                ele[column] = element[column];
+            }
+            customers.push(ele);
         }
-        data.push(ele);
-    }
-    return data;
-}
-
-
-/*
-function getCustomerAutoId () {
-    customer.findOne({ _id: '__autoid__' }, function (err, doc){
-        if (err){
-            console.log("ERROR: ", err);
-        } else {
-            console.log("Last ID: ", doc.value);
-            id = doc.value;
-            customer.update({ _id: '__autoid__' }, { $set: { value: ++doc.value } }, {}, 
-            function (err, count) {
-                if (err) {
-                    console.log("ERROR updating autoid.");
-                } else {
-                    console.log("Autoid updated: ", doc.value);
-                    return doc.value;
-                }
-            });
+        return cb(customers);
         }
-    });
+    );  
 }
-*/

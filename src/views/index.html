@@ -14,10 +14,11 @@
         </script>
         <script type="text/javascript" src="../models/customer.js"></script>
         <script type="text/javascript">
-            window.onload = function() {
-                customersData = getAllCustomers();
-                console.log(customersData);
-            }
+            var customersData = [];
+            getAllCustomers(function (customers) {
+                customersData = customers;
+            });
+            
         </script>
     </head>
 
@@ -34,7 +35,6 @@
                     { data: "address" }
                   ]
                 });
-                console.log($("#customers").DataTable().rows().data());
             });
         </script>
         <div class="table-responsive">
