@@ -2,7 +2,7 @@ const remote = require('electron').remote;
 const db = remote.getGlobal('database');
 const customerDB = db.connect().customer;
 
-const columnsDatatable = [ 'name', 'lastname', 'phone', 'address' ];
+const columnsDatatable = [ 'name', 'lastname', 'phone', 'address', '_id' ];
 
 /*
 Get data from the form and format it to insert.
@@ -44,21 +44,33 @@ function getAllCustomers (cb) {
         if (err) {
             console.log("ERROR: ", err);
             return cb(err);        
-        }
-
-        /*
-        Get columns to show in Datatables and format this data to 
-        show correctly in Datatables.
-        */
-        var customers = [];
-        for (element of data) {
-            var ele = {};
-            for (column of columnsDatatable) {
-                ele[column] = element[column];
+        } else {
+            /*
+            Get columns to show in Datatables and format this data to 
+            show correctly in Datatables.
+            */
+            var customers = [];
+            for (element of data) {
+                var ele = {};
+                for (column of columnsDatatable) {
+                    ele[column] = element[column];
+                }
+                customers.push(ele);
             }
-            customers.push(ele);
+            return cb(customers);
         }
-        return cb(customers);
+    });  
+}
+
+
+function getCustomer (id, cb) {
+    customer.find({_id: id}, function(err, data) {
+        if (err) {
+            console.log("ERROR: ", err);
+            return cb(err);
+        } else {
+            console.log(id, data);
+            return cb(data);
         }
-    );  
+    });
 }
