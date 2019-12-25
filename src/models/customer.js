@@ -4,8 +4,8 @@ const customerDB = db.connect().customer;
 
 const columnsDatatable = [ 'name', 'lastname', 'phone', 'address', '_id' ];
 
-/*
-Get data from the form and format it to insert.
+/**
+*   Get data from the form and format it to insert.
 */
 function getFormData () {
     var data = {};
@@ -15,9 +15,9 @@ function getFormData () {
 }
 
 
-/*
-Create a new Customer in database calling
-getFormData() to get info from the form.
+/**
+*   Create a new Customer in database calling
+*   getFormData() to get info from the form.
 */
 function insertCustomer () {
     var data = getFormData();
@@ -35,10 +35,10 @@ function insertCustomer () {
 }
 
 
-/* 
-Get all customers data then call processCustomersData()
-to format the data for Datatables.
-*/ 
+/**
+ *  Get all customers data then call processCustomersData()
+ *  to format the data for Datatables
+ */
 function getAllCustomers (cb) {
     customerDB.find({}, function(err, data) {
         if (err) {
@@ -62,7 +62,9 @@ function getAllCustomers (cb) {
     });  
 }
 
-
+/**
+ *  Get a customer by id from Datatable row
+ */
 function getCustomer (id, cb) {
     customer.find({_id: id}, function(err, data) {
         if (err) {

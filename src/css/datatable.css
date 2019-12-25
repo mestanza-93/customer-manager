@@ -5,3 +5,11 @@
 a {
     color: #ffffff
 }
+
+#customers tbody tr:nth-child(even):hover td{
+    background-color: #0275d8 !important;
+}
+ 
+#customers tbody tr:nth-child(odd):hover td {
+    background-color: #0275d8 !important;
+}
