@@ -19,39 +19,30 @@
             getAllCustomers(function (customers) {
                 customersData = customers;
             });
-            
         </script>
     </head>
 
     <body>
         <div id="includedContent"></div>
-        <script>
+        <script type="text/javascript">
+
             $(document).ready(function(){
-                
                 var table = $('#customers').DataTable({
-                  data: customersData,
-                  columns: [
-                    { data: "name" },
-                    { data: "lastname" },
-                    { data: "phone" },
-                    { data: "address" }
-                    
-                    // {"defaultContent": '<button name="btn-edit" onclick="" href="customer.html" class="btn btn-success btn-lg">' +
-                    //     '<a href="customer.html">Ver cliente</a></button>'
-                    // }
-                  ]
+                    language: { url: "../../config/datatable_language.json"},
+                    data: customersData,
+                    columns: [
+                        { data: "name" },
+                        { data: "lastname" },
+                        { data: "phone" },
+                        { data: "address" }
+                    ]
                 });
-                
-                // $('#customers').on('mouseover', 'td', function() {
-                //     table.row(this).addClass('highlight');
-                // });
 
                 $('#customers').on('click', 'tbody > tr > td', function() {
                     var rowData = table.row(this).data();
                     console.log(rowData);
-                    console.log(rowData[0]);
-                    window.open('customer.html');
-                    
+                    localStorage.setItem('id_customer', rowData['_id']);
+                    window.location.href = 'customer.html';
                 });
             });
         </script>
@@ -64,7 +55,6 @@
                         <th>Apellidos</th>
                         <th>Teléfono</th>
                         <th>Dirección</th>
-                        <!-- <th></th> -->
                     </tr>
                 </thead>       
                 <tfoot class="tfoot-dark">
@@ -73,7 +63,6 @@
                         <th>Apellidos</th>
                         <th>Teléfono</th>
                         <th>Dirección</th>
-                        <!-- <th></th> -->
                     </tr>
                 </tfoot>     
             </table>

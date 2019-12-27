@@ -2,7 +2,7 @@ const remote = require('electron').remote;
 const db = remote.getGlobal('database');
 const customerDB = db.connect().customer;
 
-const columnsDatatable = [ 'name', 'lastname', 'phone', 'address', '_id' ];
+const columnsDatatable = [ 'name', 'lastname', 'phone', 'address', '_id', 'email', 'phone2', 'town', 'postal_code' ];
 
 /**
 *   Get data from the form and format it to insert.
@@ -66,12 +66,16 @@ function getAllCustomers (cb) {
  *  Get a customer by id from Datatable row
  */
 function getCustomer (id, cb) {
-    customer.find({_id: id}, function(err, data) {
+    customerDB.find({_id: id}, function(err, data) {
         if (err) {
             console.log("ERROR: ", err);
             return cb(err);
         } else {
-            console.log(id, data);
+            var ele = {};
+            for (column of columnsDatatable) {
+                ele[column] = data[0][column];
+            }
+            console.log(id, ele);
             return cb(data);
         }
     });

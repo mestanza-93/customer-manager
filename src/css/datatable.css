@@ -7,9 +7,9 @@ a {
 }
 
 #customers tbody tr:nth-child(even):hover td{
-    background-color: #0275d8 !important;
+    background-color: #B2B8B2 !important;
 }
  
 #customers tbody tr:nth-child(odd):hover td {
-    background-color: #0275d8 !important;
+    background-color: #B2B8B2 !important;
 }

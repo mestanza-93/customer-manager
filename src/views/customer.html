@@ -4,15 +4,23 @@
         <meta charset="UTF-8"/>
         <script> var $ = require('jquery'); </script>
         <script> 
-          $(function(){
-            $("#includedContent").load("base.html"); 
-          });
+            $(function(){
+                $("#includedContent").load("base.html"); 
+             });
         </script>
         <script type="text/javascript" src="../models/customer.js"></script>
+        <script type="text/javascript">
+            var id_customer = localStorage.getItem('id_customer');
+            var customerData = [];
+            getCustomer(id_customer, function (customer) {
+                customerData = customer;
+            });
+            
+        </script>
     </head>
 
     <body>
         <div id="includedContent"></div>
+        <script>console.log(customerData);</script>
     </body>
-
 </html>
