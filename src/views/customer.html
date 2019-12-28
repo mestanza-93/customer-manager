@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script> var $ = require('jquery'); </script>
         <script> 
             $(function(){
@@ -9,6 +10,7 @@
              });
         </script>
         <script type="text/javascript" src="../models/customer.js"></script>
+        <link rel="stylesheet" type="text/css" href="../css/customer.css">
         <script type="text/javascript">
             var id_customer = localStorage.getItem('id_customer');
             var customerData = [];
@@ -22,5 +24,87 @@
     <body>
         <div id="includedContent"></div>
         <script>console.log(customerData);</script>
+
+        <div class="container container-header">
+            <div class="col-md-6">
+                <form class="form-inline form p-2 text-center mx-auto">
+                    <!-- Nombre cliente y apellidos en legend?? -->
+                    <legend class="display-4 py-2 px-2 text-center legend-header">Cliente</legend> 
+                    <div class="form-group p-2">
+                        <div class="row">
+                            <div class="col-1">
+                                <span><i class="fa fa-user bigicon"></i></span>
+                            </div>
+                            <div class="col ml-2">
+                                <input class="form-control" type="text" id="name" placeholder="Nombre">
+                            </div>
+                            <div class="col ml-1">
+                                <input class="form-control" type="text" id="lastname" placeholder="Apellidos">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group p-2">
+                        <div class="row">
+                            <div class="col-1">
+                                <span><i class="fa fa-envelope bigicon"></i></span>
+                            </div>
+                            <div class="col ml-2">
+                                <input class="form-control" type="text" id="email" placeholder="Email">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group p-2">
+                        <div class="row">
+                            <div class="col-1">
+                                <span><i class="fa fa-phone-square bigicon"></i></span>
+                            </div>
+                            <div class="col ml-2">
+                                <input id="phone" name="phone" type="text" placeholder="Teléfono" class="form-control">
+                            </div>
+                            <div class="col ml-1">
+                                <input id="phone2" name="phone2" type="text" placeholder="Teléfono 2" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group p-2">
+                        <div class="row">
+                            <div class="col-1">
+                                <span><i class="fas fa-map-marker-alt bigicon"></i></span>
+                            </div>
+                            <div class="col ml-2">
+                                <input id="address" name="address" type="text" placeholder="Dirección" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group p-2">
+                        <div class="row">
+                            <div class="col-1">
+                                <span><i class="fas fa-home bigicon"></i></span>
+                            </div>
+                            <div class="col ml-2">
+                                <input id="town" name="town" type="text" placeholder="Población" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group p-2">
+                        <div class="row">
+                            <div class="col-1">
+                                <span><i class="fas fa-mail-bulk bigicon"></i></span>
+                            </div>
+                            <div class="col ml-3">
+                                <input id="postalcode" name="postalcode" placeholder="Código Postal" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-warning btn-lg">Editar</button>
+                </form>
+            </div>
+        </div>
     </body>
 </html>
