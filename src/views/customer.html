@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="../css/customer.css">
         <script type="text/javascript">
             var id_customer = localStorage.getItem('id_customer');
-            var customerData = [];
+            var customerData = {};
             getCustomer(id_customer, function (customer) {
                 customerData = customer;
             });
@@ -23,23 +23,22 @@
 
     <body>
         <div id="includedContent"></div>
-        <script>console.log(customerData);</script>
 
-        <div class="container container-header">
-            <div class="col-md-6">
-                <form class="form-inline form p-2 text-center mx-auto">
-                    <!-- Nombre cliente y apellidos en legend?? -->
-                    <legend class="display-4 py-2 px-2 text-center legend-header">Cliente</legend> 
+        <div class="col-md-5">
+            <div class="well well-sm">
+                <form class="form p-2 text-center mx-auto" name="customer-edit" action="customer.html" onSubmit="editCustomer(id_customer)">
+                    <legend class="display-4 py-2 px-2 text-center legend-header">Cliente</legend>
+
                     <div class="form-group p-2">
                         <div class="row">
                             <div class="col-1">
                                 <span><i class="fa fa-user bigicon"></i></span>
                             </div>
                             <div class="col ml-2">
-                                <input class="form-control" type="text" id="name" placeholder="Nombre">
+                                <input class="form-control" type="text" id="name-edit" name="name" placeholder="Nombre">
                             </div>
-                            <div class="col ml-1">
-                                <input class="form-control" type="text" id="lastname" placeholder="Apellidos">
+                            <div class="col ml-2">
+                                <input class="form-control" type="text" id="lastname-edit" name="lastname" placeholder="Apellidos">
                             </div>
                         </div>
                     </div>
@@ -50,7 +49,7 @@
                                 <span><i class="fa fa-envelope bigicon"></i></span>
                             </div>
                             <div class="col ml-2">
-                                <input class="form-control" type="text" id="email" placeholder="Email">
+                                <input class="form-control" type="text" id="email-edit" name="email" placeholder="Email">
                             </div>
                         </div>
                     </div>
@@ -61,10 +60,10 @@
                                 <span><i class="fa fa-phone-square bigicon"></i></span>
                             </div>
                             <div class="col ml-2">
-                                <input id="phone" name="phone" type="text" placeholder="Teléfono" class="form-control">
+                                <input id="phone-edit" name="phone" type="text" placeholder="Teléfono" class="form-control">
                             </div>
                             <div class="col ml-1">
-                                <input id="phone2" name="phone2" type="text" placeholder="Teléfono 2" class="form-control">
+                                <input id="phone2-edit" name="phone2" type="text" placeholder="Teléfono 2" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -75,7 +74,7 @@
                                 <span><i class="fas fa-map-marker-alt bigicon"></i></span>
                             </div>
                             <div class="col ml-2">
-                                <input id="address" name="address" type="text" placeholder="Dirección" class="form-control">
+                                <input id="address-edit" name="address" type="text" placeholder="Dirección" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -86,18 +85,7 @@
                                 <span><i class="fas fa-home bigicon"></i></span>
                             </div>
                             <div class="col ml-2">
-                                <input id="town" name="town" type="text" placeholder="Población" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group p-2">
-                        <div class="row">
-                            <div class="col-1">
-                                <span><i class="fas fa-mail-bulk bigicon"></i></span>
-                            </div>
-                            <div class="col ml-3">
-                                <input id="postalcode" name="postalcode" placeholder="Código Postal" class="form-control">
+                                <input id="town-edit" name="town" type="text" placeholder="Población" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -106,5 +94,17 @@
                 </form>
             </div>
         </div>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                console.log(customerData);
+                document.getElementById('name-edit').value = customerData['name'];
+                document.getElementById('lastname-edit').value = customerData['lastname'];
+                document.getElementById('email-edit').value = customerData['email'];
+                document.getElementById('phone-edit').value = customerData['phone'];
+                document.getElementById('phone2-edit').value = customerData['phone2'];
+                document.getElementById('address-edit').value = customerData['address'];
+                document.getElementById('town-edit').value = customerData['town'];
+            });
+        </script>
     </body>
 </html>

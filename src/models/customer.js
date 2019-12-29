@@ -2,7 +2,8 @@ const remote = require('electron').remote;
 const db = remote.getGlobal('database');
 const customerDB = db.connect().customer;
 
-const columnsDatatable = [ 'name', 'lastname', 'phone', 'address', '_id', 'email', 'phone2', 'town', 'postal_code' ];
+const columnsDatatable = [ 'name', 'lastname', 'phone', 'address', '_id', 'email', 'phone2', 'town' ];
+
 
 /**
 *   Get data from the form and format it to insert.
@@ -21,16 +22,15 @@ function getFormData () {
 */
 function insertCustomer () {
     var data = getFormData();
-    if (data) {
+    
+    if (data['name']) {
         customerDB.insert(data, function(err, insertedData) {
-            if(!err){
-                console.log("Insert OK", insertedData.name);
-            } else {
-                console.log("ERROR: ", err);
+            if(err){
+                alert("No se ha creado el cliente correctamente.");
             }
         });
     } else {
-        console.log("No se ha generado ID.");
+        alert("Por favor introduzca un nombre");
     }  
 }
 
@@ -42,7 +42,7 @@ function insertCustomer () {
 function getAllCustomers (cb) {
     customerDB.find({}, function(err, data) {
         if (err) {
-            console.log("ERROR: ", err);
+            console.err("ERROR: ", err);
             return cb(err);        
         } else {
             /*
@@ -62,21 +62,41 @@ function getAllCustomers (cb) {
     });  
 }
 
+
 /**
  *  Get a customer by id from Datatable row
  */
 function getCustomer (id, cb) {
     customerDB.find({_id: id}, function(err, data) {
         if (err) {
-            console.log("ERROR: ", err);
+            console.err("ERROR: ", err);
             return cb(err);
         } else {
             var ele = {};
             for (column of columnsDatatable) {
                 ele[column] = data[0][column];
             }
-            console.log(id, ele);
-            return cb(data);
+            return cb(ele);
         }
     });
+}
+
+
+/**
+ *  Edit a customer by id
+ */
+function editCustomer (id) {
+    var data = getFormData();
+    
+    if (data['name']) {
+        customerDB.update({_id: id}, { $set: {name: data['name'], lastaname: data['lastname'], 
+            email: data['email'], phone: data['phone'], phone2: data['phone2'], address: data['address'],
+            town: data['town']}}, {}, function (err, num){
+                if (err) {
+                    alert("No se ha podido editar el cliente");
+                }
+        });
+    } else {
+        alert("No se ha podido editar el cliente.");
+    }   
 }
