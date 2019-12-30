@@ -2,3 +2,12 @@
     color: #0275d8;
     font-size: 35px;
 }
+
+.col-border {
+    border-right: 1px black solid;
+    border-left: 1px black solid;
+}
+
+a {
+    color: #ffffff
+}

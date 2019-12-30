@@ -23,75 +23,101 @@
 
     <body>
         <div id="includedContent"></div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-5">
+                    <form class="form p-2 text-center mx-auto" name="customer-edit" action="customer.html" onSubmit="editCustomer(id_customer)">
+                        <legend class="display-4 py-2 px-2 text-center legend-header">Cliente</legend>
 
-        <div class="col-md-5">
-            <div class="well well-sm">
-                <form class="form p-2 text-center mx-auto" name="customer-edit" action="customer.html" onSubmit="editCustomer(id_customer)">
-                    <legend class="display-4 py-2 px-2 text-center legend-header">Cliente</legend>
+                        <div class="form-group p-2">
+                            <div class="row">
+                                <div class="col-1">
+                                    <span><i class="fa fa-user bigicon"></i></span>
+                                </div>
+                                <div class="col ml-2">
+                                    <input class="form-control" type="text" id="name-edit" name="name" placeholder="Nombre">
+                                </div>
+                                <div class="col ml-2">
+                                    <input class="form-control" type="text" id="lastname-edit" name="lastname" placeholder="Apellidos">
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="form-group p-2">
+                        <div class="form-group p-2">
+                            <div class="row">
+                                <div class="col-1">
+                                    <span><i class="fa fa-envelope bigicon"></i></span>
+                                </div>
+                                <div class="col ml-2">
+                                    <input class="form-control" type="text" id="email-edit" name="email" placeholder="Email">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group p-2">
+                            <div class="row">
+                                <div class="col-1">
+                                    <span><i class="fa fa-phone-square bigicon"></i></span>
+                                </div>
+                                <div class="col ml-2">
+                                    <input id="phone-edit" name="phone" type="text" placeholder="Teléfono" class="form-control">
+                                </div>
+                                <div class="col ml-1">
+                                    <input id="phone2-edit" name="phone2" type="text" placeholder="Teléfono 2" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group p-2">
+                            <div class="row">
+                                <div class="col-1">
+                                    <span><i class="fas fa-map-marker-alt bigicon"></i></span>
+                                </div>
+                                <div class="col ml-2">
+                                    <input id="address-edit" name="address" type="text" placeholder="Dirección" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group p-2">
+                            <div class="row">
+                                <div class="col-1">
+                                    <span><i class="fas fa-home bigicon"></i></span>
+                                </div>
+                                <div class="col ml-2">
+                                    <input id="town-edit" name="town" type="text" placeholder="Población" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-warning btn-lg">Editar</button>
+                    </form>  
+                </div>
+
+                <div class="col-md-1">
+                    
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="historic-header p-3">
                         <div class="row">
-                            <div class="col-1">
-                                <span><i class="fa fa-user bigicon"></i></span>
+                            <div class="col ml-2 py-3 px-5">
+                                
                             </div>
-                            <div class="col ml-2">
-                                <input class="form-control" type="text" id="name-edit" name="name" placeholder="Nombre">
+                            <div class="col ml-6">
+                                <span class="display-4 text-center">Historial</span>
                             </div>
-                            <div class="col ml-2">
-                                <input class="form-control" type="text" id="lastname-edit" name="lastname" placeholder="Apellidos">
+                            <div class="col ml-4 p-2">
+                                <button class="btn btn-success btn-lg text-right"><a href="new_historic.html">Nuevo</a></button>
                             </div>
                         </div>
                     </div>
-
                     <div class="form-group p-2">
-                        <div class="row">
-                            <div class="col-1">
-                                <span><i class="fa fa-envelope bigicon"></i></span>
-                            </div>
-                            <div class="col ml-2">
-                                <input class="form-control" type="text" id="email-edit" name="email" placeholder="Email">
-                            </div>
+                        <div class="col ml-1">
+                            <textarea disabled class="form-control" rows="4" id="historic"></textarea>
                         </div>
                     </div>
-
-                    <div class="form-group p-2">
-                        <div class="row">
-                            <div class="col-1">
-                                <span><i class="fa fa-phone-square bigicon"></i></span>
-                            </div>
-                            <div class="col ml-2">
-                                <input id="phone-edit" name="phone" type="text" placeholder="Teléfono" class="form-control">
-                            </div>
-                            <div class="col ml-1">
-                                <input id="phone2-edit" name="phone2" type="text" placeholder="Teléfono 2" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group p-2">
-                        <div class="row">
-                            <div class="col-1">
-                                <span><i class="fas fa-map-marker-alt bigicon"></i></span>
-                            </div>
-                            <div class="col ml-2">
-                                <input id="address-edit" name="address" type="text" placeholder="Dirección" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group p-2">
-                        <div class="row">
-                            <div class="col-1">
-                                <span><i class="fas fa-home bigicon"></i></span>
-                            </div>
-                            <div class="col ml-2">
-                                <input id="town-edit" name="town" type="text" placeholder="Población" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-warning btn-lg">Editar</button>
-                </form>
+                </div>
             </div>
         </div>
         <script type="text/javascript">
