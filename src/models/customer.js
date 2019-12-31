@@ -11,7 +11,7 @@ const columnsDatatable = [ 'name', 'lastname', 'phone', 'address', '_id', 'email
 function getFormData () {
     var data = {};
     document.querySelectorAll("input").forEach(ele => data[ele.name] = ele.value || "");
-    console.log(data);
+    
     return data;
 }
 
@@ -87,9 +87,9 @@ function getCustomer (id, cb) {
  */
 function editCustomer (id) {
     var data = getFormData();
-    
+
     if (data['name']) {
-        customerDB.update({_id: id}, { $set: {name: data['name'], lastaname: data['lastname'], 
+        customerDB.update({_id: id}, { $set: {name: data['name'], lastname: data['lastname'], 
             email: data['email'], phone: data['phone'], phone2: data['phone2'], address: data['address'],
             town: data['town']}}, {}, function (err, num){
                 if (err) {

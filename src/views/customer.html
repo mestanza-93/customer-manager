@@ -2,8 +2,14 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script> var $ = require('jquery'); </script>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <script>
+            var $ = require('jquery');
+            require('bootstrap-datepicker');
+            var jquery = require('jquery');
+            window.jQuery = jquery;
+        </script>
         <script> 
             $(function(){
                 $("#includedContent").load("base.html"); 
@@ -11,6 +17,7 @@
         </script>
         <script type="text/javascript" src="../models/customer.js"></script>
         <link rel="stylesheet" type="text/css" href="../css/customer.css">
+        <script type="text/javascript" src="../../node_modules/bootstrap-datepicker/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
             var id_customer = localStorage.getItem('id_customer');
             var customerData = {};
@@ -113,14 +120,21 @@
                         </div>
                     </div>
                     <div class="form-group p-2">
-                        <div class="col ml-1">
+                        <div class="col ml-4">
                             <textarea disabled class="form-control" rows="4" id="historic"></textarea>
+                        </div>
+                        <div class="col ml-1" id='datepicker1'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="fa fa-calendar bigicon"></span>
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <script type="text/javascript">
+
             $(document).ready(function(){
                 console.log(customerData);
                 document.getElementById('name-edit').value = customerData['name'];
@@ -130,7 +144,14 @@
                 document.getElementById('phone2-edit').value = customerData['phone2'];
                 document.getElementById('address-edit').value = customerData['address'];
                 document.getElementById('town-edit').value = customerData['town'];
+
+                $('#datepicker1').datepicker({
+                    autoclose: true,
+                    language: 'es'
+                });
             });
+
+            
         </script>
     </body>
 </html>
