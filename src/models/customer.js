@@ -23,7 +23,7 @@ function getFormData () {
 function insertCustomer () {
     var data = getFormData();
     
-    if (data['name']) {
+    if (data['name'] || data['phone'] || data['address']) {
         customerDB.insert(data, function(err, insertedData) {
             if(err){
                 alert("No se ha creado el cliente correctamente.");

@@ -16,6 +16,7 @@
              });
         </script>
         <script type="text/javascript" src="../models/customer.js"></script>
+        <script type="text/javascript" src="../models/work.js"></script>
         <link rel="stylesheet" type="text/css" href="../css/customer.css">
         <script type="text/javascript" src="../../node_modules/bootstrap-datepicker/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
@@ -104,38 +105,40 @@
                 <div class="col-md-1"></div>
                 
                 <div class="col-md-6">
-                    <div class="historic-header p-3">
+                    <div class="historic-header p-2">
                         <div class="row">
-                            <div class="col ml-2 py-3 px-5">
-                                
-                            </div>
-                            <div class="col ml-2">
-                                <span class="display-4 text-center">Historial</span>
-                            </div>
+                            <legend class="display-4 py-2 px-2 text-center legend-header">Historial</legend>
                         </div>
                     </div>
-                    <div class="form-group p-2">
-                        <div class="row">
-                            <div class="col-8">
-                                <textarea class="form-control" rows="4" id="historic"></textarea>
-                            </div>
-                            <div class="col-3 input-group date">
-                                <input type='text' class="form-control" id='datepicker' placeholder="DD/MM/YYYY">
-                                    <span class="input-group-addon">
-                                        <span class="fa fa-calendar bigicon"></span>
-                                    </span> 
+                    <form class="form" name="historic-new" action="customer.html" onSubmit="insertWork(id_customer)">
+                        <div class="form-group p-1">
+                            <div class="row">
+                                <div class="col-8">
+                                    <textarea class="form-control" rows="4" id="textarea-work-new"></textarea>
+                                </div>   
+                                <div class="col-3">
+                                    <div class="row">
+                                        <div class="col-md-12 input-group date p-1">
+                                            <input type='text' class="form-control" id='datepicker-work-new' placeholder="DD/MM/YYYY">
+                                            <div class="input-group-addon">
+                                                <span class="fa fa-calendar bigicon"></span>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 p-1">
+                                            <button class="btn btn-success btn-lg text-right" type="submit">Añadir</button>
+                                        </div>
+                                    </div>
+                                </div>  
                             </div>
                         </div>
-                        <div class="col ml-4 p-2">
-                            <button class="btn btn-success btn-lg text-right"><a href="new_historic.html">Nuevo</a></button>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
         <script type="text/javascript">
             $(document).ready(function(){
-                console.log(customerData);
                 document.getElementById('name-edit').value = customerData['name'];
                 document.getElementById('lastname-edit').value = customerData['lastname'];
                 document.getElementById('email-edit').value = customerData['email'];
@@ -144,13 +147,13 @@
                 document.getElementById('address-edit').value = customerData['address'];
                 document.getElementById('town-edit').value = customerData['town'];
 
-                $('#datepicker').datepicker({
+                $('#datepicker-work-new').datepicker({
                     language: 'es'                   
                 });
                 $('.fa-calendar').click(function() {
-                    $('#datepicker').focus();
+                    $('#datepicker-work-new').focus();
                 });
-                $('#datepicker').datepicker().datepicker('setDate', new Date().toLocaleDateString("es"));
+                $('#datepicker-work-new').datepicker().datepicker('setDate', new Date().toLocaleDateString("es"));
             });     
         </script>
     </body>
