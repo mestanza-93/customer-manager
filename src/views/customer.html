@@ -101,9 +101,7 @@
                     </form>  
                 </div>
 
-                <div class="col-md-1">
-                    
-                </div>
+                <div class="col-md-1"></div>
                 
                 <div class="col-md-6">
                     <div class="historic-header p-3">
@@ -111,30 +109,31 @@
                             <div class="col ml-2 py-3 px-5">
                                 
                             </div>
-                            <div class="col ml-6">
+                            <div class="col ml-2">
                                 <span class="display-4 text-center">Historial</span>
-                            </div>
-                            <div class="col ml-4 p-2">
-                                <button class="btn btn-success btn-lg text-right"><a href="new_historic.html">Nuevo</a></button>
                             </div>
                         </div>
                     </div>
                     <div class="form-group p-2">
-                        <div class="col ml-4">
-                            <textarea disabled class="form-control" rows="4" id="historic"></textarea>
+                        <div class="row">
+                            <div class="col-8">
+                                <textarea class="form-control" rows="4" id="historic"></textarea>
+                            </div>
+                            <div class="col-3 input-group date">
+                                <input type='text' class="form-control" id='datepicker' placeholder="DD/MM/YYYY">
+                                    <span class="input-group-addon">
+                                        <span class="fa fa-calendar bigicon"></span>
+                                    </span> 
+                            </div>
                         </div>
-                        <div class="col ml-1" id='datepicker1'>
-                            <input type='text' class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="fa fa-calendar bigicon"></span>
-                            </span>
+                        <div class="col ml-4 p-2">
+                            <button class="btn btn-success btn-lg text-right"><a href="new_historic.html">Nuevo</a></button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <script type="text/javascript">
-
             $(document).ready(function(){
                 console.log(customerData);
                 document.getElementById('name-edit').value = customerData['name'];
@@ -145,13 +144,14 @@
                 document.getElementById('address-edit').value = customerData['address'];
                 document.getElementById('town-edit').value = customerData['town'];
 
-                $('#datepicker1').datepicker({
-                    autoclose: true,
-                    language: 'es'
+                $('#datepicker').datepicker({
+                    language: 'es'                   
                 });
-            });
-
-            
+                $('.fa-calendar').click(function() {
+                    $('#datepicker').focus();
+                });
+                $('#datepicker').datepicker().datepicker('setDate', new Date().toLocaleDateString("es"));
+            });     
         </script>
     </body>
 </html>
