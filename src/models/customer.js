@@ -66,8 +66,8 @@ function getAllCustomers (cb) {
 /**
  *  Get a customer by id from Datatable row
  */
-function getCustomer (id, cb) {
-    customerDB.find({_id: id}, function(err, data) {
+function getCustomer (idCustomer, cb) {
+    customerDB.find({_id: idCustomer}, function(err, data) {
         if (err) {
             console.err("ERROR: ", err);
             return cb(err);
@@ -85,11 +85,11 @@ function getCustomer (id, cb) {
 /**
  *  Edit a customer by id
  */
-function editCustomer (id) {
+function editCustomer (idCustomer) {
     var data = getFormData();
 
     if (data['name']) {
-        customerDB.update({_id: id}, { $set: {name: data['name'], lastname: data['lastname'], 
+        customerDB.update({_id: idCustomer}, { $set: {name: data['name'], lastname: data['lastname'], 
             email: data['email'], phone: data['phone'], phone2: data['phone2'], address: data['address'],
             town: data['town']}}, {}, function (err, num){
                 if (err) {
