@@ -72,3 +72,7 @@ function getCustomerWork (idCustomer, cb) {
         }
     });
 }
+
+function editWork (work) {
+    console.log(work);
+}
