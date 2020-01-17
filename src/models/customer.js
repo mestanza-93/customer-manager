@@ -2,6 +2,17 @@ const remote = require('electron').remote;
 const db = remote.getGlobal('database');
 const customerDB = db.connect().customer;
 
+const toastr = require('toastr');
+toastr.options = {
+  "progressBar": true,
+  "positionClass": "toast-top-center",
+  "timeOut": 600,
+  "fadeOut": 600,
+  "onHidden": function() {
+      window.location.reload();
+  }
+}
+
 const columnsDatatable = [ 'name', 'lastname', 'phone', 'address', '_id', 'email', 'phone2', 'town' ];
 
 
@@ -25,8 +36,13 @@ function insertCustomer () {
     
     if (data['name'] || data['phone'] || data['address']) {
         customerDB.insert(data, function(err, insertedData) {
+            console.log(insertedData);
             if(err){
                 alert("No se ha creado el cliente correctamente.");
+            } else {
+                localStorage.setItem('id_customer', insertedData['_id']);
+                toastr.success('Cliente creado con éxito.');
+                toastr.options.onHidden = window.location.assign("customer.html");
             }
         });
     } else {
@@ -94,9 +110,31 @@ function editCustomer (idCustomer) {
             town: data['town']}}, {}, function (err, num){
                 if (err) {
                     alert("No se ha podido editar el cliente");
+                } else {
+                    toastr.success("Cliente actualizado con éxito.");
                 }
         });
     } else {
         alert("No se ha podido editar el cliente.");
     }   
+}
+
+
+/**
+ *  Delete work by id
+ */
+function deleteCustomer(idCustomer) {
+    if (idCustomer) {
+        customerDB.remove({_id: idCustomer}, function(err, num) {
+            if (err) {
+                alert("No se ha podido eliminar el cliente.");
+                console.error(err);
+            } else {
+                window.location.href = '../views/index.html';
+                toastr.success("Cliente eliminado con éxito.");
+            }
+        });
+    } else {
+        alert("No se ha podido eliminar el cliente.");
+    }  
 }

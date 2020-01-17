@@ -2,22 +2,19 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>        
         <script>
             var $ = require('jquery');
             require('bootstrap-datepicker');
             var jquery = require('jquery');
             window.jQuery = jquery;
-        </script>
-        <script> 
             $(function(){
                 $("#includedContent").load("base.html"); 
              });
         </script>
-        <script type="text/javascript" src="../models/customer.js"></script>
-        <script type="text/javascript" src="../models/work.js"></script>
         <link rel="stylesheet" type="text/css" href="../css/customer.css">
+        <script type="text/javascript" src="../models/customer.js"></script>
+        <script type="text/javascript" src="../models/work.js"></script>      
         <script type="text/javascript" src="../../node_modules/bootstrap-datepicker/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
             var idCustomer = localStorage.getItem('id_customer');
@@ -30,7 +27,6 @@
             getCustomerWork(idCustomer, function (work) {
                 workData = work;
             });
-            console.log(workData);
         </script>
     </head>
 
@@ -39,7 +35,7 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-5">
-                    <form class="form p-2 text-center mx-auto" name="customer-edit" action="customer.html" onSubmit="editCustomer(idCustomer)">
+                    <form class="form p-2 text-center mx-auto" action="#" name="customer-edit" onSubmit="editCustomer(idCustomer); return false;">
                         <legend class="display-4 py-2 px-2 text-center legend-header">Cliente</legend>
 
                         <div class="form-group p-2">
@@ -104,6 +100,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-warning btn-lg">Editar</button>
+                        <button type="button" class="btn btn-danger btn-lg delete-customer">Borrar</button>
                     </form>  
                 </div>
 
@@ -115,7 +112,7 @@
                             <legend class="display-4 py-2 px-2 text-center legend-header">Historial</legend>
                         </div>
                     </div>
-                    <form class="form" name="historic-new" action="customer.html" onSubmit="insertWork(idCustomer)">
+                    <form class="form" name="historic-new" onSubmit="insertWork(idCustomer); return false;" action="#">
                         <div class="form-group p-1">
                             <div class="row">
                                 <div class="col-8">
@@ -140,7 +137,7 @@
                         </div>
                     </form>
 
-                    <!-- DIV for create historic with JS -->
+                    <!-- DIV for create historic dynamically with JS -->
                     <div class="historic-edit">
 
                     </div>
@@ -165,21 +162,28 @@
                     $('#datepicker-work-new').focus();
                 });
                 
-                for (i=0; i<workData.length; i++) {
-                    
-                    var html = '<form class="form" id="historic-edit-' + i + '" name="historic-edit" action="customer.html" onSubmit="' + editWork(workData[i]) + '"><div class="form-group p-1"><div class="row"><div class="col-8"><textarea class="form-control" rows="4" id="textarea-work-edit-' + i + '">' + workData[i]['work'] + '</textarea></div><div class="col-3"><div class="row"><div class="col-md-12 input-group date p-1"><input type="text" value="' + workData[i]['date'] + '" class="form-control" id="datepicker-work-new-' + i + '" placeholder="DD/MM/YYYY"><div class="input-group-addon"><span id="span-cal" post-id="' + i + '" class="fa fa-calendar bigicon"></span></div></input></div></div><div class="row"><div class="col-md-6 p-1"><button class="btn btn-warning btn-lg" type="submit">Editar</button></div><div class="col-md-6 p-1"><button class="btn btn-danger btn-lg" type="submit">Borrar</button></div></div></div></div></div></form>';
+                for (i=0; i<workData.length; i++) {                  
+                    var html = '<form action="#" class="form" id="historic-edit-' + i + '" name="historic-edit" onSubmit="editWork(\'' + workData[i]['_id'] + '\', \'' + i + '\'); return false;"><div class="form-group p-1"><div class="row"><div class="col-8"><textarea class="form-control" rows="4" id="textarea-work-edit-' + i + '">' + workData[i]['work'] + '</textarea></div><div class="col-3"><div class="row"><div class="col-md-12 input-group date p-1"><input type="text" value="' + workData[i]['date'] + '" class="form-control" id="datepicker-work-edit-' + i + '" placeholder="DD/MM/YYYY"><div class="input-group-addon"><span id="span-cal" post-id="' + i + '" class="fa fa-calendar bigicon"></span></div></input></div></div><div class="row"><div class="col-md-6 p-1"><button class="btn btn-warning btn-lg" type="submit">Editar</button></div><div class="col-md-6 p-1"><button type="button" class="btn btn-danger btn-lg" onclick="var result = confirm(\'¿Está seguro que quiere borrar el trabajo?\'); if (result) {deleteWork(\'' + workData[i]['_id'] + '\');}">Borrar</button></div></div></div></div></div></form>';
                     $('.historic-edit').append(html);
-                    $('#datepicker-work-new-' + i).datepicker({
+                    $('#datepicker-work-edit-' + i).datepicker({
                         language: 'es'                   
                     });
                 }
 
-                var spans = document.querySelectorAll('#span-cal')
+                var spans = document.querySelectorAll('#span-cal');
                 spans.forEach(function(span) {
                     span.addEventListener('click', function() {
                         var postId = this.getAttribute('post-id');
-                        document.getElementById('datepicker-work-new-' + postId).focus();
+                        document.getElementById('datepicker-work-edit-' + postId).focus();
                     });
+                });
+
+
+                $('.delete-customer').on('click', function() {
+                    var result = confirm('¿Está seguro que quiere borrar este cliente?');
+                    if (result) {
+                        deleteCustomer(idCustomer);
+                    }
                 });
             });     
         </script>

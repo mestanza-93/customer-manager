@@ -1,7 +1,6 @@
-{"work":"Segundo Comentario ANTIGUO","date":"21/11/2019","timestamp":1574290800000,"id_customer":"42z5s3CH4XVAA2X1","_id":"0bpeY743Y7dTTX5R","createdAt":{"$$date":1578163238082},"updatedAt":{"$$date":1578163238082}}
-{"work":"Cuarto trabajo.","date":"06/01/2020","timestamp":1578265200000,"id_customer":"42z5s3CH4XVAA2X1","_id":"9c4GGmq9HPy4ZCtE","createdAt":{"$$date":1578304791483},"updatedAt":{"$$date":1578304791483}}
-{"work":"Tercer comentario MAS NUEVO","date":"11/04/2020","timestamp":1586556000000,"id_customer":"42z5s3CH4XVAA2X1","_id":"fKRHkLwZLgcYjsy1","createdAt":{"$$date":1578163257526},"updatedAt":{"$$date":1578163257526}}
-{"work":"Primer comentario","date":"04/01/2020","timestamp":1578092400000,"id_customer":"42z5s3CH4XVAA2X1","_id":"sQuzPQZ9crjJWkiW","createdAt":{"$$date":1578305001566},"updatedAt":{"$$date":1578305001566}}
 {"work":"Primer comentario de Perico","date":"12/01/2020","timestamp":1578783600000,"id_customer":"yAtbKz0NTzVAzrTU","_id":"h2BQqBZH4nI0BLhn","createdAt":{"$$date":1578866637608},"updatedAt":{"$$date":1578866637608}}
-{"work":"Segundo comentario de perico","date":"12/01/2020","timestamp":1578783600000,"id_customer":"yAtbKz0NTzVAzrTU","_id":"wsSM1Ktr0MyR43hh","createdAt":{"$$date":1578866647511},"updatedAt":{"$$date":1578866647511}}
 {"work":"Tercer comentario de perico","date":"12/01/2020","timestamp":1578783600000,"id_customer":"yAtbKz0NTzVAzrTU","_id":"iNUlHZLIeiInIYq6","createdAt":{"$$date":1578866656378},"updatedAt":{"$$date":1578866656378}}
+{"work":"Primer comentario editado","date":"04/01/2020","timestamp":1578092400000,"id_customer":"42z5s3CH4XVAA2X1","_id":"sQuzPQZ9crjJWkiW","createdAt":{"$$date":1578305001566},"updatedAt":{"$$date":1579284845952}}
+{"work":"Hola","date":"17/01/2020","timestamp":1579215600000,"id_customer":"sFM13HbvmIaYFGra","_id":"sS0b7aos7Exs8txj","createdAt":{"$$date":1579286186064},"updatedAt":{"$$date":1579286186064}}
+{"work":"Segundo comentario de perico","date":"12/01/2020","timestamp":1578783600000,"id_customer":"yAtbKz0NTzVAzrTU","_id":"wsSM1Ktr0MyR43hh","createdAt":{"$$date":1578866647511},"updatedAt":{"$$date":1578866647511}}
+{"work":"Holasd que tal JAJajajja","date":"17/01/2020","timestamp":1579215600000,"id_customer":"sFM13HbvmIaYFGra","_id":"sS0b7aos7Exs8txj","createdAt":{"$$date":1579286186064},"updatedAt":{"$$date":1579288793452}}
