@@ -38,7 +38,7 @@ function insertCustomer () {
                 toastr.error("No se ha creado el cliente correctamente.");
             } else {
                 localStorage.setItem('id_customer', insertedData['_id']);
-                toastr.options.onHidden = window.location.assign("customer.html");
+                toastr.options.onHidden = function () { window.location.assign("customer.html"); }
                 toastr.success('Cliente creado con éxito.');
             }
         });
