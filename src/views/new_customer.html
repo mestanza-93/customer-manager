@@ -2,11 +2,11 @@
 <html>
     <head>
         <meta charset="UTF-8"/>
-        <script> var $ = require('jquery'); </script>
-        <script> 
-          $(function(){
-            $("#includedContent").load("base.html"); 
-          });
+        <script>
+            var $ = require('jquery');
+            $(function(){
+                $("#includedContent").load("base.html"); 
+            });
         </script>
         <script type="text/javascript" src="../models/customer.js"></script>
         <link rel="stylesheet" type="text/css" href="../css/form.css">
@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="well well-sm">
-                        <form name="customer" action="index.html" onSubmit="insertCustomer()" class="col-xl-8 col-lg-8 col-md-10 col-sm-10 mx-auto text-center form p-4 border border-secondary rounded border-3">                           
+                        <form name="customer" action="#" onSubmit="insertCustomer(); return false;" class="col-xl-8 col-lg-8 col-md-10 col-sm-10 mx-auto text-center form p-4 border border-secondary rounded border-3">                           
                             <legend class="display-4 py-2 px-2 text-center legend-header">Nuevo Cliente</legend>
                                     
                             <div class="form-group">
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary btn-lg">Crear</button>
+                            <button type="submit" class="btn btn-success btn-lg">Crear</button>
                         </form>
                     </div>
                 </div>

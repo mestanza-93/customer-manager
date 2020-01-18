@@ -2,6 +2,15 @@ const remote = require('electron').remote;
 const db = remote.getGlobal('database');
 const customerDB = db.connect().customer;
 
+const toastr = require('toastr');
+toastr.options = {
+  "progressBar": true,
+  "positionClass": "toast-top-center",
+  "timeOut": 750,
+  "fadeOut": 750,
+  "onHidden": function () { window.location.reload(); }
+}
+
 const columnsDatatable = [ 'name', 'lastname', 'phone', 'address', '_id', 'email', 'phone2', 'town' ];
 
 
@@ -26,11 +35,15 @@ function insertCustomer () {
     if (data['name'] || data['phone'] || data['address']) {
         customerDB.insert(data, function(err, insertedData) {
             if(err){
-                alert("No se ha creado el cliente correctamente.");
+                toastr.error("No se ha creado el cliente correctamente.");
+            } else {
+                localStorage.setItem('id_customer', insertedData['_id']);
+                toastr.options.onHidden = window.location.assign("customer.html");
+                toastr.success('Cliente creado con éxito.');
             }
         });
     } else {
-        alert("Por favor introduzca un nombre");
+        toastr.warning("Por favor introduzca un nombre");
     }  
 }
 
@@ -42,7 +55,6 @@ function insertCustomer () {
 function getAllCustomers (cb) {
     customerDB.find({}, function(err, data) {
         if (err) {
-            console.err("ERROR: ", err);
             return cb(err);        
         } else {
             /*
@@ -66,10 +78,9 @@ function getAllCustomers (cb) {
 /**
  *  Get a customer by id from Datatable row
  */
-function getCustomer (id, cb) {
-    customerDB.find({_id: id}, function(err, data) {
+function getCustomer (idCustomer, cb) {
+    customerDB.find({_id: idCustomer}, function(err, data) {
         if (err) {
-            console.err("ERROR: ", err);
             return cb(err);
         } else {
             var ele = {};
@@ -85,18 +96,51 @@ function getCustomer (id, cb) {
 /**
  *  Edit a customer by id
  */
-function editCustomer (id) {
+function editCustomer (idCustomer) {
     var data = getFormData();
 
     if (data['name']) {
-        customerDB.update({_id: id}, { $set: {name: data['name'], lastname: data['lastname'], 
+        customerDB.update({_id: idCustomer}, { $set: {name: data['name'], lastname: data['lastname'], 
             email: data['email'], phone: data['phone'], phone2: data['phone2'], address: data['address'],
             town: data['town']}}, {}, function (err, num){
                 if (err) {
-                    alert("No se ha podido editar el cliente");
+                    toastr.error("No se ha podido editar el cliente");
+                } else {
+                    toastr.success("Cliente actualizado con éxito.");
                 }
         });
     } else {
-        alert("No se ha podido editar el cliente.");
+        toastr.warning("No se ha podido editar el cliente.");
     }   
+}
+
+
+/**
+ *  Delete work by id
+ */
+function deleteCustomer(idCustomer) {
+    if (idCustomer) {
+        customerDB.remove({_id: idCustomer}, function(err, num) {
+            if (err) {
+                toastr.error("No se ha podido eliminar el cliente.");
+            } else {
+                var res;
+                workjs.deleteWorksCustomer(idCustomer, function(result){
+                    res = result;
+                    if (res == 'No remove') {
+                        toastr.options.onHidden = function () { window.location.assign("index.html"); }
+                        toastr.success("Cliente eliminado con éxito.");
+                        
+                    } else if (res == 'Remove') {
+                        toastr.options.onHidden = function () { window.location.assign("index.html"); }
+                        toastr.success("Cliente y su historial eliminado con éxito.");
+                    } else {
+                        toastr.error("No se ha podido eliminar el historial del cliente.");
+                    }
+                });
+            }
+        });
+    } else {
+        toastr.error("No se ha podido eliminar el cliente.");
+    }
 }
