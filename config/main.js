@@ -5,9 +5,12 @@ const path = require('path')
 const db = require('./db')
 global.database = db
 
-const { app, BrowserWindow, ipcMain } = electron
+const { app, BrowserWindow, Menu } = electron
 
 let mainWindow
+
+// Remove Menu
+Menu.setApplicationMenu(null)
 
 function createWindow () {
   mainWindow = new BrowserWindow({

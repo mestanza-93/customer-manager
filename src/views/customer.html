@@ -14,7 +14,10 @@
         </script>
         <link rel="stylesheet" type="text/css" href="../css/customer.css">
         <script type="text/javascript" src="../models/customer.js"></script>
-        <script type="text/javascript" src="../models/work.js"></script>      
+        <!-- <script type="text/javascript" src="../models/work.js"></script> -->
+        <script>
+            var workjs = require('../models/work');
+        </script>
         <script type="text/javascript" src="../../node_modules/bootstrap-datepicker/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
             var idCustomer = localStorage.getItem('id_customer');
@@ -24,7 +27,7 @@
             });
 
             var workData = {};
-            getCustomerWork(idCustomer, function (work) {
+            workjs.getCustomerWork(idCustomer, function (work) {
                 workData = work;
             });
         </script>
@@ -112,7 +115,8 @@
                             <legend class="display-4 py-2 px-2 text-center legend-header">Historial</legend>
                         </div>
                     </div>
-                    <form class="form" name="historic-new" onSubmit="insertWork(idCustomer); return false;" action="#">
+
+                    <form class="form" name="historic-new" onSubmit="workjs.insertWork(idCustomer); return false;" action="#">
                         <div class="form-group p-1">
                             <div class="row">
                                 <div class="col-8">
@@ -163,7 +167,7 @@
                 });
                 
                 for (i=0; i<workData.length; i++) {                  
-                    var html = '<form action="#" class="form" id="historic-edit-' + i + '" name="historic-edit" onSubmit="editWork(\'' + workData[i]['_id'] + '\', \'' + i + '\'); return false;"><div class="form-group p-1"><div class="row"><div class="col-8"><textarea class="form-control" rows="4" id="textarea-work-edit-' + i + '">' + workData[i]['work'] + '</textarea></div><div class="col-3"><div class="row"><div class="col-md-12 input-group date p-1"><input type="text" value="' + workData[i]['date'] + '" class="form-control" id="datepicker-work-edit-' + i + '" placeholder="DD/MM/YYYY"><div class="input-group-addon"><span id="span-cal" post-id="' + i + '" class="fa fa-calendar bigicon"></span></div></input></div></div><div class="row"><div class="col-md-6 p-1"><button class="btn btn-warning btn-lg" type="submit">Editar</button></div><div class="col-md-6 p-1"><button type="button" class="btn btn-danger btn-lg" onclick="var result = confirm(\'¿Está seguro que quiere borrar el trabajo?\'); if (result) {deleteWork(\'' + workData[i]['_id'] + '\');}">Borrar</button></div></div></div></div></div></form>';
+                    var html = '<form action="#" class="form" id="historic-edit-' + i + '" name="historic-edit" onSubmit="workjs.editWork(\'' + workData[i]['_id'] + '\', \'' + i + '\'); return false;"><div class="form-group p-1"><div class="row"><div class="col-8"><textarea class="form-control" rows="4" id="textarea-work-edit-' + i + '">' + workData[i]['work'] + '</textarea></div><div class="col-3"><div class="row"><div class="col-md-12 input-group date p-1"><input type="text" value="' + workData[i]['date'] + '" class="form-control" id="datepicker-work-edit-' + i + '" placeholder="DD/MM/YYYY"><div class="input-group-addon"><span id="span-cal" post-id="' + i + '" class="fa fa-calendar bigicon"></span></div></input></div></div><div class="row"><div class="col-md-6 p-1"><button class="btn btn-warning btn-lg" type="submit">Editar</button></div><div class="col-md-6 p-1"><button type="button" class="btn btn-danger btn-lg" onclick="var result = confirm(\'¿Está seguro que quiere borrar el trabajo?\'); if (result) {workjs.deleteWork(\'' + workData[i]['_id'] + '\');}">Borrar</button></div></div></div></div></div></form>';
                     $('.historic-edit').append(html);
                     $('#datepicker-work-edit-' + i).datepicker({
                         language: 'es'                   
@@ -180,7 +184,7 @@
 
 
                 $('.delete-customer').on('click', function() {
-                    var result = confirm('¿Está seguro que quiere borrar este cliente?');
+                    var result = confirm('¿Está seguro que quiere borrar este cliente y su historial?');
                     if (result) {
                         deleteCustomer(idCustomer);
                     }

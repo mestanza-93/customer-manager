@@ -2,7 +2,7 @@
     "sProcessing":     "Procesando...",
                 "sLengthMenu":     "Mostrar _MENU_ clientes",
                 "sZeroRecords":    "No se encontraron resultados",
-                "sEmptyTable":     "Ningún dato disponible en esta tabla :(",
+                "sEmptyTable":     "Ningún cliente disponible en esta tabla",
                 "sInfo":           "Mostrando clientes del _START_ al _END_ de un total de _TOTAL_ clientes",
                 "sInfoEmpty":      "Mostrando clientes del 0 al 0 de un total de 0 clientes",
                 "sInfoFiltered":   "(filtrado de un total de _MAX_ clientes)",

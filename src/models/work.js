@@ -44,13 +44,13 @@ function insertWork (idCustomer) {
     if (data['work'] || data['date']) {
         workDB.insert(data, function(err, insertedData) {
             if(err){
-                alert("No se ha creado el cliente correctamente.");
+                toastr.error("No se ha creado el cliente correctamente.");
             } else {
                 toastr.success("Trabajo creado con éxito.");
             }
         });
     } else {
-        alert("Por favor introduzca datos esenciales.");
+        toastr.warning("Por favor introduzca datos esenciales.");
     }  
 }
 
@@ -61,7 +61,6 @@ function insertWork (idCustomer) {
 function getCustomerWork (idCustomer, cb) {
     workDB.find({id_customer: idCustomer}).sort({timestamp: -1}).exec(function(err, data) {
         if (err) {
-            console.err("ERROR: ", err);
             return cb(err);
         } else {
             return cb(data);
@@ -105,32 +104,56 @@ function editWork (idWork, i) {
         workDB.update({_id: idWork}, { $set: {work: data['work'], date: data['date'], 
             timestamp: data['timestamp']}}, {}, function (err, num){
                 if (err) {
-                    alert("No se ha podido editar historial");
+                    toastr.error("No se ha podido editar historial");
                 } else {
                     toastr.success("Trabajo actualizado con éxito.");
                 }
         });
     } else {
-        alert("Introduzca algo en el historial.");
+        toastr.warning("Introduzca algo en el historial.");
     } 
 }
 
 
 /**
- *  Delete work by id
+ *  Delete work by id work
  */
 function deleteWork(idWork) {
     if (idWork) {
         workDB.remove({_id: idWork}, function(err, num) {
             if (err) {
-                alert("No se ha podido eliminar el trabajo.");
-                console.error(err);
+                toastr.error("No se ha podido eliminar el trabajo.");
             } else {
-                //window.location.reload();
                 toastr.success("Trabajo eliminado con éxito.");
             }        
         });
     } else {
-        alert("No se ha podido eliminar el trabajo.");
+        toastr.error("No se ha podido eliminar el trabajo.");
     }  
 }
+
+
+/**
+ *  Delete all works of a Customer
+ */
+function deleteWorksCustomer(idCustomer, cb) {
+    if (idCustomer) {
+        workDB.remove({id_customer: idCustomer}, {multi: true}, function(err, num) {
+            if (err) {
+                console.log("Error borrando historial");
+                return cb(-1);
+            } else if (num >= 1){
+                console.log("Borrando historial");
+                return cb('Remove');         
+            } else {
+                console.log("No hay historial que borrar");
+                cb('No remove');       
+            }       
+        });
+    } else {
+        console.log("No customer ID");
+        return cb(-1);
+    }  
+}
+
+module.exports = {getCustomerWork, insertWork, editWork, deleteWork, deleteWorksCustomer};
