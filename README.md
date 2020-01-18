@@ -23,15 +23,13 @@ $ npm start
 ## Built with 🛠️
 
 * [ElectronJS](https://electronjs.org/) - Framework
-* [NeDB](https://github.com/louischatriot/nedb) - Database
+* [NeDB](https://github.com/louischatriot/nedb) - Embedded database
 * [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/) - Framework web
 
 
 ## Autor ✒️
 
-* **Mestanza** - *Code and docs* - [Mestanza](https://github.com/mestanza-93)
-
- [contributors](https://github.com/your/project/contributors)
+* **Mestanza** - *Code and docs* - [mestanza-93](https://github.com/mestanza-93)
  
 
 ## License 📄
