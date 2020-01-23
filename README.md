@@ -1,4 +1,4 @@
-# Project title
+# Customer manager
 
 Customer management app built with ElectronJS
 
@@ -27,11 +27,11 @@ $ npm start
 * [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/) - Framework web
 
 
-## Autor ✒️
+## Author ✒️
 
 * **Mestanza** - *Code and docs* - [mestanza-93](https://github.com/mestanza-93)
  
 
 ## License 📄
 
-Project under license (MIT) - You can check [LICENSE.md](LICENSE.md) for details.
+Project under license (MIT) - You can check [LICENSE](LICENSE) for details.
