@@ -1,7 +1,7 @@
 const electron = require('electron')
 const url = require('url')
 const path = require('path')
-require ('hazardous')
+
 
 const db = require('./db')
 global.database = db
@@ -23,12 +23,12 @@ function createWindow () {
   })
 
   mainWindow.loadURL(url.format({
-    pathname: path.join( process.cwd(), '..', 'src', 'views', 'index.html' ),
+    pathname: path.join( process.cwd(), 'src', 'views', 'index.html' ),
     protocol: 'file:',
     slashes: true
   }))
 
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', () => {
     mainWindow = null

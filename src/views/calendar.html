@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <script>var $ = require('jquery');</script>
+        <script> 
+            $(function(){
+                $("#includedContent").load("base.html"); 
+            });
+        </script>
+
+        <link rel="stylesheet" href="../../node_modules/@fullcalendar/core/main.css">
+        <link rel="stylesheet" href="../../node_modules/@fullcalendar/daygrid/main.css">
+        <link rel="stylesheet" href="../../node_modules/@fullcalendar/bootstrap/main.css">
+
+        <link href='https://use.fontawesome.com/releases/v5.0.6/css/all.css' rel='stylesheet'>
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css' rel='stylesheet' />
+ 
+        <script src="../../node_modules/@fullcalendar/core/main.js"></script>
+        <script src="../../node_modules/@fullcalendar/daygrid/main.js"></script>
+        <script src="../../node_modules/@fullcalendar/bootstrap/main.js"></script>
+        <script src="../../node_modules/@fullcalendar/core/locales/es.js"></script>
+
+        <link rel="stylesheet" href="../css/calendar.css">
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var calendarEl = document.getElementById('calendar');        
+                var calendar = new FullCalendar.Calendar(calendarEl, {
+                    plugins: [ 'dayGrid', 'bootstrap', 'timeGrid', 'list' ],
+                    themeSystem: 'bootstrap',
+                    locale: 'es',
+                    timeZone: 'UTC',
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                    }
+                });      
+                calendar.render();
+            });    
+        </script>
+    </head>
+
+    <body style="background-color: #F2F2F2;">
+        <div id="includedContent"></div>
+        <div id="calendar" style="background-color: white;"></div>
+    </body>
+</html>

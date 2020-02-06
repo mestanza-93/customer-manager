@@ -1,6 +1,6 @@
 const Datastore = require('nedb');
 const path = require('path');
-require ('hazardous');
+// require ('hazardous');
 
 var config = {
     pathCustomer: path.join( process.cwd() , '..', 'database', 'customer.db'),

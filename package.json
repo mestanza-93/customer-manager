@@ -10,8 +10,14 @@
     "dist-windows": "electron-builder --win --x64"
   },
   "electron-builder": {
-    "appId": "customer-manager",
+    "appId": "customer.manager",
+    "productName": "Customer Manager",
+    "asar": true,
     "category": "customer-manager.electronjs",
+    "directories": {
+      "output": "./build",
+      "app": "./dist"
+    },
     "linux": {
       "target": [
         "AppImage",
@@ -43,6 +49,9 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
+    "@fullcalendar/bootstrap": "^4.3.0",
+    "@fullcalendar/core": "^4.3.1",
+    "@fullcalendar/daygrid": "^4.3.0",
     "bootstrap": "^4.4.1",
     "bootstrap-datepicker": "^1.9.0",
     "datatables.net": "^1.10.20",
