@@ -144,3 +144,37 @@ function deleteCustomer(idCustomer) {
         toastr.error("No se ha podido eliminar el cliente.");
     }
 }
+
+
+function getAllCustomersWork(cb){
+    var customersData = {};
+    getAllCustomers(function (customers) {
+        customersData = customers;
+        console.log(customers);
+    });
+    var customersWork = {};
+    var cont = 0;
+    console.log(customersData);
+    for (customer in customersData) {
+        console.log("customer");
+        if (customer['name'] && customer['name'] != '') {
+            var workData = {};
+            workjs.getCustomerWork(customer['_id'], function (work) {
+                workData = work;
+            });
+
+            for (work in workData) {
+                if (work['date'] && work['date'] != '') {
+                    customersWork[cont]['title'] = customer['name'];
+                    customersWork[cont]['startDate'] = work['date'];
+                }
+                cont++;
+            }     
+        }
+        cont++;
+    }
+    console.log(cont);
+    
+    console.log(customersWork);
+    return cb(customersWork);
+}

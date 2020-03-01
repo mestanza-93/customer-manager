@@ -23,22 +23,34 @@
 
         <link rel="stylesheet" href="../css/calendar.css">
 
+        <script type="text/javascript" src="../models/customer.js"></script>
+                <script>
+            var workjs = require('../models/work');
+        </script>
+        <script type="text/javascript">
+            var customersWork = {};
+            getAllCustomersWork(function (customers) {
+                customersWork = customers;
+            });
+            
+        </script>
+
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 var calendarEl = document.getElementById('calendar');        
                 var calendar = new FullCalendar.Calendar(calendarEl, {
-                    plugins: [ 'dayGrid', 'bootstrap', 'timeGrid', 'list' ],
+                    plugins: [ 'dayGrid', 'bootstrap' ],
                     themeSystem: 'bootstrap',
                     locale: 'es',
                     timeZone: 'UTC',
                     header: {
                         left: 'prev,next today',
                         center: 'title',
-                        right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                        right: 'dayGridWeek, dayGridMonth'
                     }
                 });      
                 calendar.render();
-            });    
+            });   
         </script>
     </head>
 
