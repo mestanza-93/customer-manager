@@ -11,7 +11,7 @@ toastr.options = {
   "onHidden": function () { window.location.reload(); }
 }
 
-const columnsDatatable = [ 'name', 'lastname', 'phone', 'address', '_id', 'email', 'phone2', 'town' ];
+const columnsDatatable = [ 'name', 'lastname', 'phone', 'address', '_id', 'dni', 'postalcode', 'phone2', 'town' ];
 
 
 /**
@@ -62,9 +62,9 @@ function getAllCustomers (cb) {
             show correctly in Datatables.
             */
             var customers = [];
-            for (element of data) {
+            for (var element of data) {
                 var ele = {};
-                for (column of columnsDatatable) {
+                for (var column of columnsDatatable) {
                     ele[column] = element[column];
                 }
                 customers.push(ele);
@@ -84,7 +84,7 @@ function getCustomer (idCustomer, cb) {
             return cb(err);
         } else {
             var ele = {};
-            for (column of columnsDatatable) {
+            for (var column of columnsDatatable) {
                 ele[column] = data[0][column];
             }
             return cb(ele);
@@ -101,7 +101,7 @@ function editCustomer (idCustomer) {
 
     if (data['name']) {
         customerDB.update({_id: idCustomer}, { $set: {name: data['name'], lastname: data['lastname'], 
-            email: data['email'], phone: data['phone'], phone2: data['phone2'], address: data['address'],
+            dni: data['dni'], postalcode: data['postalcode'], phone: data['phone'], phone2: data['phone2'], address: data['address'],
             town: data['town']}}, {}, function (err, num){
                 if (err) {
                     toastr.error("No se ha podido editar el cliente");
@@ -163,7 +163,7 @@ function getAllCustomersWork(cb){
                 workData = work;
             });
 
-            for (work in workData) {
+            for (var work in workData) {
                 if (work['date'] && work['date'] != '') {
                     customersWork[cont]['title'] = customer['name'];
                     customersWork[cont]['startDate'] = work['date'];

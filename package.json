@@ -5,30 +5,9 @@
   "main": "config/main.js",
   "scripts": {
     "start-dev": "nodemon --watch * --exec \"electron .\"",
-    "start": "electron .",
-    "dist-linux": "electron-builder --linux --x64",
-    "dist-windows": "electron-builder --win --x64"
-  },
-  "electron-builder": {
-    "appId": "customer.manager",
-    "productName": "Customer Manager",
-    "asar": true,
-    "category": "customer-manager.electronjs",
-    "directories": {
-      "output": "./build",
-      "app": "./dist"
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ],
-      "icon": "build/app.ico"
-    },
-    "win": {
-      "target": "NSIS",
-      "icon": "build/app.ico"
-    }
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "repository": {
     "type": "git",
@@ -44,8 +23,12 @@
   },
   "homepage": "https://github.com/mestanza-93/customer-manager#readme",
   "devDependencies": {
-    "electron": "^7.1.9",
-    "electron-builder": "^22.2.0"
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "electron-forge": "^5.2.4",
+    "electron-prebuilt-compile": "4.0.0",
+    "nodemon": "^2.0.1"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.11.2",
@@ -56,12 +39,45 @@
     "bootstrap-datepicker": "^1.9.0",
     "datatables.net": "^1.10.20",
     "datatables.net-bs4": "^1.10.20",
+    "electron-compile": "^6.4.4",
+    "electron-squirrel-startup": "^1.0.0",
     "hazardous": "^0.3.0",
     "jquery": "^3.4.1",
-    "morgan": "^1.9.1",
     "nedb": "^1.8.0",
-    "nodemon": "^2.0.1",
     "popper.js": "^1.16.0",
     "toastr": "^2.1.4"
+  },
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ],
+        "linux": [
+          "deb"
+        ]
+      },
+      "electronPackagerConfig": {
+        "quiet": true,
+        "asar": true,
+        "icon": "build/icon.ico",
+        "win32metadata": {
+          "CompanyName": "Mestanza",
+          "ProductName": "CustomerManager"
+        }
+      },
+      "electronWinstallerConfig": {
+        "name": "customermanager",
+        "setupIcon": "build/icon.ico",
+        "iconURL": "/home/mestanza/workspace/electron/customer-manager/build/icon.ico",
+        "setupExe": "setup.exe",
+        "setupMSI": "setup.msi",
+        "noMsi": false
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "customermanager"
+      }
+    }
   }
 }

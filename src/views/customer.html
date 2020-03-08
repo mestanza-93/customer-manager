@@ -58,17 +58,6 @@
                         <div class="form-group p-2">
                             <div class="row">
                                 <div class="col-1">
-                                    <span><i class="fa fa-envelope bigicon"></i></span>
-                                </div>
-                                <div class="col ml-2">
-                                    <input class="form-control" type="text" id="email-edit" name="email" placeholder="Email">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group p-2">
-                            <div class="row">
-                                <div class="col-1">
                                     <span><i class="fa fa-phone-square bigicon"></i></span>
                                 </div>
                                 <div class="col ml-2">
@@ -76,6 +65,20 @@
                                 </div>
                                 <div class="col ml-1">
                                     <input id="phone2-edit" name="phone2" type="text" placeholder="Teléfono 2" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group p-2">
+                            <div class="row">
+                                <div class="col-1">
+                                    <span><i class="fas fa-id-card bigicon"></i></span>
+                                </div>
+                                <div class="col ml-2">
+                                    <input class="form-control" type="text" id="dni-edit" name="dni" placeholder="DNI">
+                                </div>
+                                <div class="col ml-2">
+                                    <input class="form-control" type="text" id="postalcode-edit" name="postalcode" placeholder="Código Postal">
                                 </div>
                             </div>
                         </div>
@@ -152,7 +155,8 @@
             $(document).ready(function(){
                 document.getElementById('name-edit').value = customerData['name'];
                 document.getElementById('lastname-edit').value = customerData['lastname'];
-                document.getElementById('email-edit').value = customerData['email'];
+                document.getElementById('dni-edit').value = customerData['dni'];
+                document.getElementById('postalcode-edit').value = customerData['postalcode'];
                 document.getElementById('phone-edit').value = customerData['phone'];
                 document.getElementById('phone2-edit').value = customerData['phone2'];
                 document.getElementById('address-edit').value = customerData['address'];
