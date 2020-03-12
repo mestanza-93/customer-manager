@@ -1,10 +1,9 @@
 const Datastore = require('nedb');
 const path = require('path');
-// require ('hazardous');
 
 var config = {
-    pathCustomer: path.join( process.cwd(), 'database', 'customer.db'),
-    pathWork: path.join( process.cwd(), 'database', 'work.db')
+    pathCustomer: '../database/customer.db',
+    pathWork: '../database/work.db'
 }
 
 var customer = new Datastore({ filename: config.pathCustomer, timestampData: true, autoload: true});

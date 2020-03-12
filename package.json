@@ -7,7 +7,7 @@
     "start-dev": "nodemon --watch * --exec \"electron .\"",
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make --platform=win32 --arch=x64"
   },
   "repository": {
     "type": "git",
@@ -41,7 +41,6 @@
     "datatables.net-bs4": "^1.10.20",
     "electron-compile": "^6.4.4",
     "electron-squirrel-startup": "^1.0.0",
-    "hazardous": "^0.3.0",
     "jquery": "^3.4.1",
     "nedb": "^1.8.0",
     "popper.js": "^1.16.0",
@@ -52,13 +51,9 @@
       "make_targets": {
         "win32": [
           "squirrel"
-        ],
-        "linux": [
-          "deb"
         ]
       },
       "electronPackagerConfig": {
-        "quiet": true,
         "asar": true,
         "icon": "build/icon.ico",
         "win32metadata": {
@@ -66,13 +61,20 @@
           "ProductName": "CustomerManager"
         }
       },
+      "electronWixMSIConfig": {
+        "name": "Customer Manager",
+        "appUserModelId": "customer-manager",
+        "manufacturer": "Mestanza",
+        "ui": {
+          "enabled": true,
+          "chooseDirectory": true
+        }
+      },
       "electronWinstallerConfig": {
         "name": "customermanager",
         "setupIcon": "build/icon.ico",
-        "iconURL": "/home/mestanza/workspace/electron/customer-manager/build/icon.ico",
-        "setupExe": "setup.exe",
-        "setupMSI": "setup.msi",
-        "noMsi": false
+        "iconURL": "build/icon.ico",
+        "setupExe": "customer-manager.exe"
       },
       "windowsStoreConfig": {
         "packageName": "",
