@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Gestor Clientes</title>
     <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
 
@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="../../node_modules/@fullcalendar/core/main.min.css">
     <link rel="stylesheet" href="../../node_modules/@fullcalendar/daygrid/main.min.css">
     <link rel="stylesheet" href="../../node_modules/@fullcalendar/bootstrap/main.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/datatable.css"></link>
+    <link rel="stylesheet" type="text/css" href="../css/datatable.css">
+    </link>
 
     <script>
         require('popper.js');
@@ -42,12 +43,16 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="calendar.html">Calendario</a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="user.html">Datos usuario</a>
+                </li>
             </ul>
         </div>
         <form action="new_customer.html">
             <button class="btn btn-primary my-2 my-sm-0 text-center" type="submit">Nuevo cliente</button>
         </form>
-        
+
     </nav>
 </body>
+
 </html>

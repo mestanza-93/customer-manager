@@ -14,13 +14,16 @@
         </script>
         <link rel="stylesheet" type="text/css" href="../css/customer.css">
         <script type="text/javascript" src="../models/customer.js"></script>
-        <!-- <script type="text/javascript" src="../models/work.js"></script> -->
+
         <script>
             var workjs = require('../models/work');
+            var invoicejs = require('../models/invoice');
         </script>
+        
         <script type="text/javascript" src="../../node_modules/bootstrap-datepicker/js/locales/bootstrap-datepicker.es.js"></script>
         <script type="text/javascript">
             var idCustomer = localStorage.getItem('id_customer');
+        
             var customerData = {};
             getCustomer(idCustomer, function (customer) {
                 customerData = customer;
@@ -145,13 +148,97 @@
                     </form>
 
                     <!-- DIV for create historic dynamically with JS -->
-                    <div class="historic-edit">
-
+                    <div class="historic-edit"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Invoice Modal -->
+        <div class="modal fade" id="invoiceModal" tabindex="-1" role="dialog" aria-labelledby="invoiceModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="invoiceModalLabel">Factura</h5>
+                       
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="invoice-id" class="col-form-label"><b>Número factura</b></label>
+                                    <input id="invoice-id" name="invoice-id" type="text" class="form-control">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="iva" class="col-form-label"><b>% IVA</b></label>
+                                    <input id="iva" name="iva" type="text" class="form-control" value="21">
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="border: 1px solid black;">
+                        <form id="invoice-form" action="invoice.html" style="display: none;">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="concept" class="col-form-label"><b>Concepto</b></label>
+                                        <input id="concept" name="concept" type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="units" class="col-form-label"><b>Unidades</b></label>
+                                        <input id="units" name="units" type="number" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="base" class="col-form-label"><b>Precio unidad</b></label>
+                                        <input id="base" name="base" type="number" class="form-control">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="delete-product" class="col-form-label col-md-12"><b>Acciones</b></label>
+                                        <input class="btn btn-danger btn-delete-product form-control col-md-6" name="" id="" type="button" value="Quitar">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr style="border: 1px solid black;">
+                        </form>
+                        <button type="button" class="btn btn-primary btn-add-product">Añadir</button>
+                        <input hidden id="id-work-invoice">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success btn-create-invoice">Crear factura</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
         </div>
+
         <script type="text/javascript">
+
+            function refreshListener() {
+                $('.btn-delete-product').off();
+
+                $('.btn-delete-product').on('click', function () {
+                    var idProduct = this.id;
+                    var row = this.name;
+
+                    if (row == '') {
+                        $('#invoice-form').hide();
+                    }
+
+                    $('form[name="invoice-form' + row + '"]').hide();           
+
+                    if (idProduct && idProduct != '') {
+                        invoicejs.deleteProduct(idProduct);
+                    }
+
+                });
+            }
+
+
             $(document).ready(function(){
                 document.getElementById('name-edit').value = customerData['name'];
                 document.getElementById('lastname-edit').value = customerData['lastname'];
@@ -171,7 +258,7 @@
                 });
                 
                 for (i=0; i<workData.length; i++) {                  
-                    var html = '<form action="#" class="form" id="historic-edit-' + i + '" name="historic-edit" onSubmit="workjs.editWork(\'' + workData[i]['_id'] + '\', \'' + i + '\'); return false;"><div class="form-group p-1"><div class="row"><div class="col-8"><textarea class="form-control" rows="4" id="textarea-work-edit-' + i + '">' + workData[i]['work'] + '</textarea></div><div class="col-3"><div class="row"><div class="col-md-12 input-group date p-1"><input type="text" value="' + workData[i]['date'] + '" class="form-control" id="datepicker-work-edit-' + i + '" placeholder="DD/MM/YYYY"><div class="input-group-addon"><span id="span-cal" post-id="' + i + '" class="fa fa-calendar bigicon"></span></div></input></div></div><div class="row"><div class="col-md-6 p-1"><button class="btn btn-warning btn-lg" type="submit">Editar</button></div><div class="col-md-6 p-1"><button type="button" class="btn btn-danger btn-lg" onclick="var result = confirm(\'¿Está seguro que quiere borrar el trabajo?\'); if (result) {workjs.deleteWork(\'' + workData[i]['_id'] + '\');}">Borrar</button></div></div></div></div></div></form>';
+                    var html = '<form action="#" class="form" id="historic-edit-' + i + '" name="historic-edit" onSubmit="workjs.editWork(\'' + workData[i]['_id'] + '\', \'' + i + '\'); return false;"><div class="form-group p-1"><div class="row"><div class="col-8"><textarea class="form-control" rows="6" id="textarea-work-edit-' + i + '">' + workData[i]['work'] + '</textarea></div><div class="col-3"><div class="row"><div class="col-md-12 input-group date p-1"><input type="text" value="' + workData[i]['date'] + '" class="form-control" id="datepicker-work-edit-' + i + '" placeholder="DD/MM/YYYY"><div class="input-group-addon"><span id="span-cal" post-id="' + i + '" class="fa fa-calendar bigicon"></span></div></input></div></div><div class="row"><div class="col-md-6 p-1"><button class="btn btn-warning btn-lg" type="submit">Editar</button></div><div class="col-md-6 p-1"><button type="button" class="btn btn-danger btn-lg" onclick="var result = confirm(\'¿Está seguro que quiere borrar el trabajo?\'); if (result) {workjs.deleteWork(\'' + workData[i]['_id'] + '\');}">Borrar</button></div></div><div class="row"><div class="col-md-6 p-1"><button type="button" id="btn-open-invoice-' + i + '" class="btn btn-primary btn-lg btn-open-invoice" data-toggle="modal" data-target="#invoiceModal">Factura</button></div></div></div></div></div></form>';
                     $('.historic-edit').append(html);
                     $('#datepicker-work-edit-' + i).datepicker({
                         language: 'es'                   
@@ -193,7 +280,113 @@
                         deleteCustomer(idCustomer);
                     }
                 });
-            });     
+                
+                $('.btn-open-invoice').on('click', function() {
+                    var id = this.id;
+                    id = id.replace('btn-open-invoice-', '');
+                    idWork = workData[id]['_id']
+                    $('#id-work-invoice').val(idWork);
+                    localStorage.setItem('id_work', idWork);
+
+                    let lastIdInvoice = require('../../config/invoice_id.json');
+                    var newIdInvoice = parseInt(lastIdInvoice['id']) + 1;
+                    var idLenght = newIdInvoice.toString.length;
+                    newIdInvoice = newIdInvoice.toString();
+
+                    if (idLenght == 1) {
+                        newIdInvoice = "000" + newIdInvoice;
+                    } else if (idLenght == 2) {
+                        newIdInvoice = "00" + newIdInvoice;
+                    } else if (idLenght == 3) {
+                        newIdInvoice = "0" + newIdInvoice;
+                    }
+
+                    $('#invoice-id').val(newIdInvoice);
+
+                    console.log(newIdInvoice);
+
+                    invoicejs.getInvoice(idWork, function (invoice) {
+                        invoiceData = invoice;
+                        var source = $('#invoice-form');             
+
+                        if (invoiceData.length > 0) {
+                            for (p = 0; p<invoiceData.length; p++) {
+                                var clone = source.clone();
+                                var formId = [];
+                                formIdConcept = clone.find(':input')[0].id;
+                                formIdUnits = clone.find(':input')[1].id;
+                                formIdBase = clone.find(':input')[2].id;
+                                clone.find(':input')[3].id = invoiceData[p]['_id'];
+                                clone.find(':input')[3].name = p;
+
+                                if (p == 0) {
+                                    $('#invoice-id').val(invoiceData[p]['id_invoice']);
+                                    $('#iva').val(invoiceData[p]['iva']);
+                                }
+
+                                clone.find(':input')[0].id = formIdConcept + p;
+                                clone.find(':input')[0].value = invoiceData[p]['concept'];
+
+                                clone.find(':input')[1].id = formIdUnits + p;
+                                clone.find(':input')[1].value = invoiceData[p]['units'];
+
+                                clone.find(':input')[2].id = formIdBase + p;
+                                clone.find(':input')[2].value = invoiceData[p]['base'];
+                                clone.attr('name', "invoice-form" + p);
+                                clone.show();
+                                clone.insertBefore(source);
+
+                                refreshListener();
+
+                            }
+                        } else {
+                            source.show();
+                        }
+                    });   
+                });
+
+                (function() {
+                    var count = 1;
+
+                    $('.btn-add-product').on('click', function() {
+
+                        var source = $('#invoice-form'),
+                            clone = source.clone();
+                        
+                        if (!source) {
+                            var source = $('#invoice-form0'),
+                            clone = source.clone();
+                        }
+
+                        clone.find(':input').attr('id', function(i, val) {
+                            return val + count;
+                        });
+
+                        clone.find(':input')[0].value = "";
+                        clone.find(':input')[1].value = "";
+                        clone.find(':input')[2].value = "";
+                        // clone.find(':input')[3].onclick = refreshListener;
+
+                        clone.attr('name', "invoice-form" + count);
+                        clone.insertBefore(this);
+                        count++;
+
+                        refreshListener();
+
+                    });
+
+                })();
+
+                $('.btn-create-invoice').on('click', function() {
+                    var idWork = $('#id-work-invoice').val();
+
+                    invoicejs.insertInvoice(idWork);
+                });
+
+                refreshListener();
+            });
+
+            
         </script>
     </body>
 </html>

@@ -11,3 +11,11 @@
 a {
     color: #ffffff
 }
+
+.modal-body {
+    background-color: #F2F2F2;
+}
+
+hr {
+    border: 1px solid black;
+}

@@ -1,4 +1,5 @@
 /node_modules
 /database
 /dist
-out/
+/out
+/config/user_data.json

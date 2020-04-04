@@ -25,6 +25,7 @@ $ npm start
 * [ElectronJS](https://electronjs.org/) - Framework
 * [NeDB](https://github.com/louischatriot/nedb) - Embedded database
 * [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/introduction/) - Framework web
+* [FullCalendar.io](https://fullcalendar.io/) - JavaScript Calendar
 
 
 ## Author ✒️

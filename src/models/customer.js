@@ -4,23 +4,23 @@ const customerDB = db.connect().customer;
 
 const toastr = require('toastr');
 toastr.options = {
-  "progressBar": true,
-  "positionClass": "toast-top-center",
-  "timeOut": 750,
-  "fadeOut": 750,
-  "onHidden": function () { window.location.reload(); }
+    "progressBar": true,
+    "positionClass": "toast-top-center",
+    "timeOut": 750,
+    "fadeOut": 750,
+    "onHidden": function () { window.location.reload(); }
 }
 
-const columnsDatatable = [ 'name', 'lastname', 'phone', 'address', '_id', 'dni', 'postalcode', 'phone2', 'town' ];
+const columnsDatatable = ['name', 'lastname', 'phone', 'address', '_id', 'dni', 'postalcode', 'phone2', 'town'];
 
 
 /**
 *   Get data from the form and format it to insert.
 */
-function getFormData () {
+function getFormData() {
     var data = {};
     document.querySelectorAll("input").forEach(ele => data[ele.name] = ele.value || "");
-    
+
     return data;
 }
 
@@ -29,12 +29,12 @@ function getFormData () {
 *   Create a new Customer in database calling
 *   getFormData() to get info from the form.
 */
-function insertCustomer () {
+function insertCustomer() {
     var data = getFormData();
-    
+
     if (data['name'] || data['phone'] || data['address']) {
-        customerDB.insert(data, function(err, insertedData) {
-            if(err){
+        customerDB.insert(data, function (err, insertedData) {
+            if (err) {
                 toastr.error("No se ha creado el cliente correctamente.");
             } else {
                 localStorage.setItem('id_customer', insertedData['_id']);
@@ -44,7 +44,7 @@ function insertCustomer () {
         });
     } else {
         toastr.warning("Por favor introduzca un nombre");
-    }  
+    }
 }
 
 
@@ -52,10 +52,10 @@ function insertCustomer () {
  *  Get all customers data then call processCustomersData()
  *  to format the data for Datatables
  */
-function getAllCustomers (cb) {
-    customerDB.find({}, function(err, data) {
+function getAllCustomers(cb) {
+    customerDB.find({}, function (err, data) {
         if (err) {
-            return cb(err);        
+            return cb(err);
         } else {
             /*
             Get columns to show in Datatables and format this data to 
@@ -71,15 +71,15 @@ function getAllCustomers (cb) {
             }
             return cb(customers);
         }
-    });  
+    });
 }
 
 
 /**
  *  Get a customer by id from Datatable row
  */
-function getCustomer (idCustomer, cb) {
-    customerDB.find({_id: idCustomer}, function(err, data) {
+function getCustomer(idCustomer, cb) {
+    customerDB.find({ _id: idCustomer }, function (err, data) {
         if (err) {
             return cb(err);
         } else {
@@ -96,22 +96,26 @@ function getCustomer (idCustomer, cb) {
 /**
  *  Edit a customer by id
  */
-function editCustomer (idCustomer) {
+function editCustomer(idCustomer) {
     var data = getFormData();
 
     if (data['name']) {
-        customerDB.update({_id: idCustomer}, { $set: {name: data['name'], lastname: data['lastname'], 
-            dni: data['dni'], postalcode: data['postalcode'], phone: data['phone'], phone2: data['phone2'], address: data['address'],
-            town: data['town']}}, {}, function (err, num){
-                if (err) {
-                    toastr.error("No se ha podido editar el cliente");
-                } else {
-                    toastr.success("Cliente actualizado con éxito.");
-                }
+        customerDB.update({ _id: idCustomer }, {
+            $set: {
+                name: data['name'], lastname: data['lastname'],
+                dni: data['dni'], postalcode: data['postalcode'], phone: data['phone'], phone2: data['phone2'], address: data['address'],
+                town: data['town']
+            }
+        }, {}, function (err, num) {
+            if (err) {
+                toastr.error("No se ha podido editar el cliente");
+            } else {
+                toastr.success("Cliente actualizado con éxito.");
+            }
         });
     } else {
         toastr.warning("No se ha podido editar el cliente.");
-    }   
+    }
 }
 
 
@@ -120,17 +124,17 @@ function editCustomer (idCustomer) {
  */
 function deleteCustomer(idCustomer) {
     if (idCustomer) {
-        customerDB.remove({_id: idCustomer}, function(err, num) {
+        customerDB.remove({ _id: idCustomer }, function (err, num) {
             if (err) {
                 toastr.error("No se ha podido eliminar el cliente.");
             } else {
                 var res;
-                workjs.deleteWorksCustomer(idCustomer, function(result){
+                workjs.deleteWorksCustomer(idCustomer, function (result) {
                     res = result;
                     if (res == 'No remove') {
                         toastr.options.onHidden = function () { window.location.assign("index.html"); }
                         toastr.success("Cliente eliminado con éxito.");
-                        
+
                     } else if (res == 'Remove') {
                         toastr.options.onHidden = function () { window.location.assign("index.html"); }
                         toastr.success("Cliente y su historial eliminado con éxito.");
@@ -146,7 +150,7 @@ function deleteCustomer(idCustomer) {
 }
 
 
-function getAllCustomersWork(cb){
+function getAllCustomersWork(cb) {
     var customersData = {};
     getAllCustomers(function (customers) {
         customersData = customers;
@@ -169,12 +173,12 @@ function getAllCustomersWork(cb){
                     customersWork[cont]['startDate'] = work['date'];
                 }
                 cont++;
-            }     
+            }
         }
         cont++;
     }
     console.log(cont);
-    
+
     console.log(customersWork);
     return cb(customersWork);
 }

@@ -39,9 +39,12 @@
     "bootstrap-datepicker": "^1.9.0",
     "datatables.net": "^1.10.20",
     "datatables.net-bs4": "^1.10.20",
+    "dom-to-image": "^2.6.0",
     "electron-compile": "^6.4.4",
+    "electron-pdf": "^7.0.0",
     "electron-squirrel-startup": "^1.0.0",
     "jquery": "^3.4.1",
+    "jspdf": "^1.5.3",
     "nedb": "^1.8.0",
     "popper.js": "^1.16.0",
     "toastr": "^2.1.4"
@@ -81,5 +84,8 @@
         "name": "customermanager"
       }
     }
+  },
+  "nodemonConfig": {
+    "ignore": ["*.json"]
   }
 }

@@ -22,13 +22,14 @@ function createWindow () {
     }
   })
 
-  mainWindow.loadURL(`file://${path.resolve(__dirname, '..', 'src', 'views')}/index.html`);
+mainWindow.loadURL(`file://${path.resolve(__dirname, '..', 'src', 'views')}/index.html`);
 
-//  mainWindow.webContents.openDevTools()
+mainWindow.webContents.openDevTools()
 
-  mainWindow.on('closed', () => {
-    mainWindow = null
-  })
+mainWindow.on('closed', () => {
+  mainWindow = null
+})
+
 }
 
 app.on('ready', createWindow)
