@@ -178,7 +178,7 @@
                             </div>
                         </div>
                         <hr style="border: 1px solid black;">
-                        <form id="invoice-form" action="invoice.html" style="display: none;">
+                        <form id="invoice-form" action="invoice.html" style="display: none;" name="form-hidden">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -345,6 +345,12 @@
                     });   
                 });
 
+
+                $('#invoiceModal').on("hidden.bs.modal", function () {
+                    $('form[name^="invoice-form"]').remove();
+                    console.log("ENTRO");
+                });
+
                 (function() {
                     var count = 1;
 
@@ -365,7 +371,6 @@
                         clone.find(':input')[0].value = "";
                         clone.find(':input')[1].value = "";
                         clone.find(':input')[2].value = "";
-                        // clone.find(':input')[3].onclick = refreshListener;
 
                         clone.attr('name', "invoice-form" + count);
                         clone.insertBefore(this);

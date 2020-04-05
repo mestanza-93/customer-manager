@@ -280,7 +280,12 @@
       let lastIdInvoice = require('../../config/invoice_id.json');
       var newIdInvoice = parseInt(lastIdInvoice['id']) + 1;
       var data = {};
-      data['id'] = newIdInvoice;
+
+      if (parseInt(lastIdInvoice['id']) == parseInt(idInvoice)) {
+        data['id'] = parseInt(lastIdInvoice['id']);
+      } else {
+        data['id'] = newIdInvoice;
+      }
 
       $('#page').css('margin-left', '0');
 
@@ -288,18 +293,20 @@
         
       domtoimage.toPng(document.getElementById('page'))
         .then(function (blob) {
-            var pdf = new jspdf('p', 'mm', "a4");
-            var width = pdf.internal.pageSize.getWidth();
-            var height = pdf.internal.pageSize.getHeight();
+          var pdf = new jspdf('p', 'mm', "a4");
+          var width = pdf.internal.pageSize.getWidth();
+          var height = pdf.internal.pageSize.getHeight();
+          const app = require('electron').remote.app;
+          const path = require('path');
 
-            pdf.addImage(blob, 'PNG', 0, 0, width, height, 'test', 'MEDIUM', 0);
-            pdf.save("Factura " + year + "-" + idInvoice + ".pdf", {returnPromise:true}).then(fs.writeFile('./config/invoice_id.json', JSON.stringify(data), function (err) {
-              if (err) {
-                  throw err;
-              }
-            }));     
-            
-            window.location.href = "index.html";
+          pdf.addImage(blob, 'PNG', 0, 0, width, height, 'test', 'MEDIUM', 0);
+          pdf.save("Factura " + year + "-" + idInvoice + ".pdf", {returnPromise:true}).then(fs.writeFile(path.join(app.getAppPath(), "config", "invoice_id.json"), JSON.stringify(data), function (err) {
+            if (err) {
+                throw err;
+            }
+          }));     
+          
+          window.location.href = "index.html";
             
         });        
     });

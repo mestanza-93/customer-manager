@@ -28,25 +28,24 @@
     "babel-preset-react": "^6.24.1",
     "electron-forge": "^5.2.4",
     "electron-prebuilt-compile": "4.0.0",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.2"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.11.2",
-    "@fullcalendar/bootstrap": "^4.3.0",
-    "@fullcalendar/core": "^4.3.1",
-    "@fullcalendar/daygrid": "^4.3.0",
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "@fullcalendar/bootstrap": "^4.4.0",
+    "@fullcalendar/core": "^4.4.0",
+    "@fullcalendar/daygrid": "^4.4.0",
     "bootstrap": "^4.4.1",
     "bootstrap-datepicker": "^1.9.0",
     "datatables.net": "^1.10.20",
     "datatables.net-bs4": "^1.10.20",
     "dom-to-image": "^2.6.0",
     "electron-compile": "^6.4.4",
-    "electron-pdf": "^7.0.0",
     "electron-squirrel-startup": "^1.0.0",
     "jquery": "^3.4.1",
     "jspdf": "^1.5.3",
     "nedb": "^1.8.0",
-    "popper.js": "^1.16.0",
+    "popper.js": "^1.16.1",
     "toastr": "^2.1.4"
   },
   "config": {
@@ -57,7 +56,7 @@
         ]
       },
       "electronPackagerConfig": {
-        "asar": true,
+        "asar": false,
         "icon": "build/icon.ico",
         "win32metadata": {
           "CompanyName": "Mestanza",
@@ -86,6 +85,8 @@
     }
   },
   "nodemonConfig": {
-    "ignore": ["*.json"]
+    "ignore": [
+      "*.json"
+    ]
   }
 }

@@ -1,6 +1,8 @@
-let fs = require('fs');
-let jsonFile = require('../../config/user_data.json');
-let fields = ['name', 'lastname', 'address', 'town', 'province', 'country', 'postalcode', 'dni', 'phone', 'email'];
+const fs = require('fs');
+const jsonFile = require('../../config/user_data.json');
+const fields = ['name', 'lastname', 'address', 'town', 'province', 'country', 'postalcode', 'dni', 'phone', 'email'];
+const app = require('electron').remote.app;
+const path = require('path');
 
 
 function getUserData() {
@@ -20,9 +22,11 @@ function updateUserData() {
         data[field] = document.getElementById(field).value;
     }
 
-    fs.writeFile('./config/user_data.json', JSON.stringify(data), function (err) {
+    fs.writeFile(path.join(app.getAppPath(), "config", "user_data.json"), JSON.stringify(data), function (err) {
         if (err) {
             throw err;
+        } else {
+            window.location.reload();
         }
     });
 }
