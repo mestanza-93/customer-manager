@@ -87,6 +87,7 @@ function getCustomer(idCustomer, cb) {
             for (var column of columnsDatatable) {
                 ele[column] = data[0][column];
             }
+
             return cb(ele);
         }
     });
