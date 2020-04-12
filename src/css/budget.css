@@ -1,0 +1,72 @@
+div.page {
+    background: white;
+    display: block;
+    margin: 0 auto;
+    /* margin-left: 0 */
+    margin-bottom: 0.5cm;
+    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+  }
+  div.page[data-size="A4"] {  
+    width: 21cm;
+    height: 29.7cm; 
+  }
+  
+  .basic {
+    font-family: "Arial";
+    font-size: 12px;
+  }
+  
+  .budget-title {
+    font-size: 30px;
+  }
+  
+  .bigtext {
+    font-size: 18px;
+  }
+  
+  .medium-text {
+    font-size: 14px;
+  }
+  
+  .small-text {
+    font-size: 10px;
+  }
+  
+  .bold {
+    font-weight: bold;
+  }
+  
+  .normal {
+    font-weight: normal;
+  }
+  
+  .borderless td, .borderless th {
+      border: none;
+  }
+  
+  .table-customer {
+     border: 1px solid black;
+  }
+  
+  .card-head {
+    margin-left: 20px;
+  }
+  
+  .card-footer {
+    position: absolute;
+    bottom: 0;
+  }
+  
+  table.table-bordered > thead > tr > th{
+    border:1px solid black;
+  }
+  
+  table.table-bordered > tbody > tr > td{
+    border:1px solid black;
+  }
+  
+  th {
+    background-color: #D3D3D3;
+  }
+  
+  

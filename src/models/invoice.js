@@ -22,6 +22,24 @@ function getInvoice(idWork, cb) {
 
 
 /**
+ *  Get the invoice of the work
+ */
+function getLastIdInvoice(cb) {
+    invoiceDB.find({}).sort({ id_invoice: -1 }).limit(1).exec(function (err, data) {
+        if (err) {
+            return cb(err);
+        } else {
+            if (data[0]) {
+                return cb(data[0]['id_invoice']);
+            } else {
+                return "0000";
+            }
+        }
+    });
+}
+
+
+/**
  *  Get from invoice modal
  */
 function getInvoiceData() {
@@ -29,7 +47,7 @@ function getInvoiceData() {
     var cont = 0;
     var forms = document.querySelectorAll('#invoice-form');
     var idInvoice = document.querySelector('#invoice-id');
-    var iva = document.querySelector('#iva');
+    var iva = document.querySelector('#invoice-iva');
 
     for (var form of forms) {
         data[cont] = form.elements;
@@ -92,4 +110,30 @@ function deleteProduct(idInvoice) {
     }
 }
 
-module.exports = { getInvoice, insertInvoice, deleteProduct };
+
+/**
+ *  Refresh listener when the form hides.
+ */
+function refreshListenerInvoice() {
+    $('.btn-delete-product-invoice').off();
+
+    $('.btn-delete-product-invoice').on('click', function () {
+        var idProduct = this.id;
+        var row = this.name;
+
+        if (row == '') {
+            $('#invoice-form').hide();
+        }
+
+        $('form[name="invoice-form' + row + '"]').hide();           
+
+        if (idProduct && idProduct != '') {
+            invoicejs.deleteProduct(idProduct);
+        }
+
+    });
+}
+
+
+
+module.exports = { getInvoice, getLastIdInvoice, insertInvoice, deleteProduct, refreshListenerInvoice };
