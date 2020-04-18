@@ -34,28 +34,6 @@ function getNewWorkData() {
 
 
 /**
-*   Create a new work with id customer in database calling
-*   getFormData() to get info from the historic form.
-*/
-function insertWork(idCustomer) {
-    var data = getNewWorkData();
-
-    data['id_customer'] = idCustomer;
-    if (data['work'] || data['date']) {
-        workDB.insert(data, function (err, insertedData) {
-            if (err) {
-                toastr.error("No se ha creado el cliente correctamente.");
-            } else {
-                toastr.success("Trabajo creado con éxito.");
-            }
-        });
-    } else {
-        toastr.warning("Por favor introduzca datos esenciales.");
-    }
-}
-
-
-/**
  *  Get historic work of a customer by id
  */
 function getCustomerWork(idCustomer, cb) {
@@ -91,6 +69,46 @@ function getWorkToEdit(i) {
     }
 
     return data;
+}
+
+
+/**
+ *  Get all Works 
+ */
+function getAllWorks(cb) {
+    workDB.find({}, function (err, data) {
+        if (err) {
+            return cb(err);
+        } else {
+            var works = [];
+            for (var element of data) { 
+                works.push(element);
+            }
+            return cb(works);
+        }
+    });
+}
+
+
+/**
+*   Create a new work with id customer in database calling
+*   getFormData() to get info from the historic form.
+*/
+function insertWork(idCustomer) {
+    var data = getNewWorkData();
+
+    data['id_customer'] = idCustomer;
+    if (data['work'] || data['date']) {
+        workDB.insert(data, function (err, insertedData) {
+            if (err) {
+                toastr.error("No se ha creado el cliente correctamente.");
+            } else {
+                toastr.success("Trabajo creado con éxito.");
+            }
+        });
+    } else {
+        toastr.warning("Por favor introduzca datos esenciales.");
+    }
 }
 
 
@@ -156,4 +174,4 @@ function deleteWorksCustomer(idCustomer, cb) {
     }
 }
 
-module.exports = { getCustomerWork, insertWork, editWork, deleteWork, deleteWorksCustomer };
+module.exports = { getCustomerWork, getAllWorks, insertWork, editWork, deleteWork, deleteWorksCustomer };

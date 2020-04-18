@@ -28,7 +28,7 @@
     "babel-preset-react": "^6.24.1",
     "electron-forge": "^5.2.4",
     "electron-prebuilt-compile": "4.0.0",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.3"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
@@ -42,7 +42,7 @@
     "dom-to-image": "^2.6.0",
     "electron-compile": "^6.4.4",
     "electron-squirrel-startup": "^1.0.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jspdf": "^1.5.3",
     "nedb": "^1.8.0",
     "popper.js": "^1.16.1",

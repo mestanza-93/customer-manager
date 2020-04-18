@@ -28,36 +28,28 @@
     <script>
         var workjs = require('../models/work');
     </script>
-    <script type="text/javascript">
-        var customersWork = {};
-        getAllCustomersWork(function (customers) {
-            customersWork = customers;
-        });
-
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                plugins: ['dayGrid', 'bootstrap'],
-                themeSystem: 'bootstrap',
-                locale: 'es',
-                timeZone: 'UTC',
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridWeek, dayGridMonth'
-                }
-            });
-            calendar.render();
-        });   
-    </script>
+    <script type="text/javascript" src="../listeners/calendar.js"></script>
 </head>
 
 <body style="background-color: #F2F2F2;">
     <div id="includedContent"></div>
     <div id="calendar" style="background-color: white;"></div>
+    <div id="calendarModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="modalTitle" class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modalBody" class="modal-body"> </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

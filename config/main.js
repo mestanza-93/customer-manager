@@ -13,36 +13,36 @@ let mainWindow
 Menu.setApplicationMenu(null)
 
 function createWindow () {
-  mainWindow = new BrowserWindow({
-    width: 1800,
-    height: 1000,
-    webPreferences: {
-      nodeIntegration: true
-    }
-  })
+    mainWindow = new BrowserWindow({
+        width: 1800,
+        height: 1000,
+        webPreferences: {
+            nodeIntegration: true
+        }
+    })
 
-mainWindow.maximize()
+    mainWindow.maximize()
 
-mainWindow.loadURL(`file://${path.resolve(__dirname, '..', 'src', 'views')}/index.html`);
+    mainWindow.loadURL(`file://${path.resolve(__dirname, '..', 'src', 'views')}/index.html`);
 
-// mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools()
 
-mainWindow.on('closed', () => {
-  mainWindow = null
-})
+    mainWindow.on('closed', () => {
+        mainWindow = null
+    })
 
 }
 
 app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
 })
 
 app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow()
-  }
+    if (mainWindow === null) {
+        createWindow()
+    }
 })
