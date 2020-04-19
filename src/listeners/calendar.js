@@ -30,11 +30,12 @@ document.addEventListener('DOMContentLoaded', function () {
             center: 'title',
             right: 'dayGridWeek, dayGridMonth'
         },
-        eventClick:  function(event, jsEvent, view) {
-            $('#modalTitle').html(event.title);
-            // $('#modalBody').html(event.description);
-            // $('#eventUrl').attr('href',event.url);
-            $('#fullCalModal').modal();
+        eventClick:  function(eventSource) {
+            $('#modal-title').html(eventSource.event.title);
+            $('#modal-date').html(moment(eventSource.event.start).format('DD/MM/YYYY'));
+            $('#modal-description').html(eventSource.event._def.extendedProps.description);
+            localStorage.setItem('id_customer', eventSource.event.id);
+            $('#calendar-modal').modal();
         }
     });
     calendar.render();
@@ -49,7 +50,9 @@ getAllCustomers(function (customers) {
             for (var w in works) {
                 if (customers[c]['_id'] == works[w]['id_customer']){
                     var ele = {};
+                    ele['id'] = customers[c]['_id'];
                     ele['title'] = customers[c]['name'] + " " + customers[c]['lastname'];
+                    ele['description'] = works[w]['work'];
                     ele['start'] = works[w]['date'].split('/').reverse().join('-');
                     ele['color'] = bgColors[c % totalColors];
                     ele['textColor'] = textColors[c % totalColors];
