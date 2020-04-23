@@ -27,37 +27,37 @@
     <script type="text/javascript" src="../models/customer.js"></script>
     <script>
         var workjs = require('../models/work');
+        var moment = require('moment');
     </script>
-    <script type="text/javascript">
-        var customersWork = {};
-        getAllCustomersWork(function (customers) {
-            customersWork = customers;
-        });
-
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                plugins: ['dayGrid', 'bootstrap'],
-                themeSystem: 'bootstrap',
-                locale: 'es',
-                timeZone: 'UTC',
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridWeek, dayGridMonth'
-                }
-            });
-            calendar.render();
-        });   
-    </script>
+    <script type="text/javascript" src="../listeners/calendar.js"></script>
 </head>
 
 <body style="background-color: #F2F2F2;">
     <div id="includedContent"></div>
-    <div id="calendar" style="background-color: white;"></div>
+
+    <div id="calendar"></div>
+
+    <div id="calendar-modal" class="modal fade">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 id="modal-title" class="modal-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div id="modal-body" class="modal-body"> 
+                    <strong><span id="modal-date"></span></strong>
+                    <hr style="border: 1px solid black;">
+                    <p id="modal-description"></p>
+                </div>
+                <div class="modal-footer">
+                    <a href="customer.html" class="btn btn-success">Ver cliente</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
