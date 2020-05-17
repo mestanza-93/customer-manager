@@ -1,6 +1,7 @@
 $(document).ready(function(){    
     
     var invoicejs = require('../models/invoice');
+    var workjs = require('../models/work');
 
     var idCustomer = localStorage.getItem('id_customer');
     var idWork = localStorage.getItem('id_work');
@@ -23,7 +24,7 @@ $(document).ready(function(){
     getCustomer(idCustomer, function (customer) {
         var customerData = customer;
 
-        document.getElementById("today").innerHTML = new Date().toLocaleDateString("es");
+
         document.getElementById("year").innerHTML = new Date().getFullYear();
 
         if (customerData['name'] && customerData['lastname']) {
@@ -47,6 +48,19 @@ $(document).ready(function(){
         }
 
     });
+
+    workjs.getWork(idWork, function (work) {
+        var workData = work;
+        console.log(workData);
+        if (workData[0]['date']) {
+            document.getElementById("today").innerHTML = workData[0]['date'];
+        } else {
+            document.getElementById("today").innerHTML = new Date().toLocaleDateString("es");
+        }
+        
+    });
+
+
 
     invoicejs.getInvoice(idWork, function (invoice) {
         var invoiceData = invoice;

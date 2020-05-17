@@ -46,6 +46,21 @@ function getCustomerWork(idCustomer, cb) {
     });
 }
 
+
+/**
+ *  Get work by id
+ */
+function getWork(idWork, cb) {
+    workDB.find({ _id: idWork }, function (err, data) {
+        if (err) {
+            return cb(err);
+        } else {
+            return cb(data);
+        }
+    });
+}
+
+
 /**
  *  Get work data to edit from Form by id
  */
@@ -174,4 +189,4 @@ function deleteWorksCustomer(idCustomer, cb) {
     }
 }
 
-module.exports = { getCustomerWork, getAllWorks, insertWork, editWork, deleteWork, deleteWorksCustomer };
+module.exports = { getWork, getCustomerWork, getAllWorks, insertWork, editWork, deleteWork, deleteWorksCustomer };
