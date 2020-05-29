@@ -51,7 +51,6 @@ $(document).ready(function(){
 
     workjs.getWork(idWork, function (work) {
         var workData = work;
-        console.log(workData);
         if (workData[0]['date']) {
             document.getElementById("today").innerHTML = workData[0]['date'];
         } else {
