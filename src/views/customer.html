@@ -164,6 +164,13 @@
                                     <label for="iva" class="col-form-label"><b>% IVA</b></label>
                                     <input id="invoice-iva" name="iva" type="text" class="form-control" value="21">
                                 </div>
+                                <div class="col-md-3">
+                                    <label for="invoice-payment" class="col-form-label"><b>Pago</b></label>
+                                    <select id="invoice-payment" name="payment" class="form-control">
+                                        <option value="1">Efectivo</option>
+                                        <option value="2">Transferencia</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <hr style="border: 1px solid black;">
@@ -193,6 +200,14 @@
                                 </div>
                             </div>
                             <hr style="border: 1px solid black;">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label for="comment" class="col-form-label"><b>Observaciones</b></label>
+                                        <input class="form-control" id="comment" name="comment" type="text"></input>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                         <button type="button" class="btn btn-primary btn-add-product-invoice">Añadir</button>
                         <input hidden id="id-work-invoice">
