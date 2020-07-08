@@ -141,6 +141,43 @@ $(document).ready(function(){
         document.getElementById("total-iva-sum").innerHTML = parseFloat(ivaSum).toFixed(2) + " €";
         document.getElementById("total").innerHTML = parseFloat(total).toFixed(2) + " €";
 
+        var tablePayment = document.getElementById("payment-body");
+
+        if (product['payment']){
+            var payment = product['payment'] == 2 ? "Transferencia" : "Efectivo";
+            document.getElementById("payment").innerHTML = payment;
+            if (product['payment'] == 2){
+                var row = document.createElement("tr");
+
+                // Payment label column
+                var paymentLabelTD = document.createElement("td");
+                paymentLabelTD.classList.add("align-middle", "medium-text", "text-right", "bold");
+                paymentLabelTD.innerHTML = "IBAN";
+                row.appendChild(paymentLabelTD);
+
+                // Payment value column
+                var paymentValueTD = document.createElement("td");
+                paymentValueTD.classList.add("align-middle", "medium-text", "text-center");
+                paymentValueTD.innerHTML = jsonFile['iban'] ? jsonFile['iban'] : '';
+    
+                row.appendChild(paymentValueTD);
+                tablePayment.appendChild(row);
+            }
+        } else {
+            document.getElementById("payment").innerHTML = "Efectivo";
+        }
+        if (product['comment']){
+            var row = document.createElement("tr");
+
+            // Comment column
+            var commentTD = document.createElement("td");
+            commentTD.classList.add("align-middle", "medium-text", "text-center");
+            commentTD.colSpan = "2";
+            commentTD.innerHTML = product['comment'];
+
+            row.appendChild(commentTD);
+            tablePayment.appendChild(row);
+        }
 
         $('.btn-pdf').on('click', function () {
             const jspdf = require('jspdf');
