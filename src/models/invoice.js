@@ -48,11 +48,15 @@ function getInvoiceData() {
     var forms = document.querySelectorAll('#invoice-form');
     var idInvoice = document.querySelector('#invoice-id');
     var iva = document.querySelector('#invoice-iva');
+    var paymentType = document.querySelector('#invoice-payment');
+    var comment = document.querySelector('#invoice-comment');
 
     for (var form of forms) {
         data[cont] = form.elements;
         data[cont]['id_invoice'] = idInvoice;
         data[cont]['iva'] = iva;
+        data[cont]['paymentType'] = paymentType;
+        data[cont]['comment'] = comment;
         cont++;
     }
 
@@ -78,12 +82,14 @@ function insertInvoice(idWork) {
             insertData['units'] = product['units'].value;
             insertData['base'] = product['base'].value;
             insertData['iva'] = product['iva'].value;
+            insertData['payment_type'] = product['paymentType'].value;
+            insertData['comment'] = product['comment'].value;
             insertData['id_invoice'] = product['id_invoice'].value;
             insertData['id_work'] = idWork;
             insertData['date'] = today;
             insertData['timestamp'] = timestamp;
 
-            invoiceDB.update({ id_invoice: insertData['id_invoice'], id_work: insertData['id_work'], concept: insertData['concept'], base: insertData['base'] }, { $set: { concept: insertData['concept'], units: insertData['units'], base: insertData['base'], iva: insertData['iva'], id_invoice: insertData['id_invoice'], id_work: insertData['id_work'], date: insertData['date'], timestamp: insertData['timestamp'] } }, { upsert: true }, function (err, num) {
+            invoiceDB.update({ id_invoice: insertData['id_invoice'], id_work: insertData['id_work'], concept: insertData['concept'], base: insertData['base'] }, { $set: { concept: insertData['concept'], units: insertData['units'], base: insertData['base'], iva: insertData['iva'], payment: insertData['payment_type'], comment: insertData['comment'], id_invoice: insertData['id_invoice'], id_work: insertData['id_work'], date: insertData['date'], timestamp: insertData['timestamp'] } }, { upsert: true }, function (err, num) {
                 if (err) {
                     toastr.error("No se ha creado la factura correctamente.");
                 }
