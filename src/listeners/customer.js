@@ -74,6 +74,8 @@ $(document).ready(function(){
                         if (p == 0) {
                             $('#invoice-id').val(invoiceData[p]['id_invoice']);
                             $('#invoice-iva').val(invoiceData[p]['iva']);
+                            $('#invoice-payment').val(invoiceData[p]['payment']);
+                            $('#invoice-comment').val(invoiceData[p]['comment']);
                         }
     
                         clone.find(':input')[0].id = formIdConcept + p;

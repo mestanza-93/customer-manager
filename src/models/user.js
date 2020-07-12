@@ -1,6 +1,6 @@
 const fs = require('fs');
 const jsonFile = require('../../config/user_data.json');
-const fields = ['name', 'lastname', 'address', 'town', 'province', 'country', 'postalcode', 'dni', 'phone', 'email'];
+const fields = ['name', 'lastname', 'address', 'town', 'province', 'country', 'postalcode', 'dni', 'phone', 'email', 'iban'];
 const app = require('electron').remote.app;
 const path = require('path');
 

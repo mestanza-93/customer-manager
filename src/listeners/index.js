@@ -45,7 +45,6 @@ $(document).ready(function () {
         
             $('#customers').on('click', 'tbody > tr > td', function () {
                 var rowData = table.row(this).data();
-                console.log(rowData);
                 localStorage.setItem('id_customer', rowData['_id']);
                 window.location.href = 'customer.html';
             });
