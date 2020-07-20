@@ -4,9 +4,5 @@
 /out
 /cron
 /config/user_data.json
-/build/invoice_logo.jpeg
-/build/logo_bgless.png
-/build/invoice_logo.ico
-/build/ico_bgless.ico
-/build/icon.ico
+/build
 package-lock.json
