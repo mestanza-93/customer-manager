@@ -58,7 +58,7 @@
       },
       "electronPackagerConfig": {
         "asar": false,
-        "icon": "build/icon.ico",
+        "icon": "build/ico_bgless.ico",
         "win32metadata": {
           "CompanyName": "Mestanza",
           "ProductName": "CustomerManager"
@@ -75,8 +75,8 @@
       },
       "electronWinstallerConfig": {
         "name": "customermanager",
-        "setupIcon": "build/icon.ico",
-        "iconURL": "build/icon.ico",
+        "setupIcon": "build/ico_bgless.ico",
+        "iconURL": "build/ico_bgless.ico",
         "setupExe": "customer-manager.exe"
       },
       "windowsStoreConfig": {
